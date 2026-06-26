@@ -202,26 +202,6 @@
     </tcr4cap-comments>
   </tool>
 
-  <tool id="metaedit-avi">
-    <name>AVI MetaEdit</name>
-    <type>Metadata Editors</type>
-    <version release-date="2018-05-09">1.02</version>
-    <license>Public Domain / CC0</license>
-    <url type="homepage">https://mediaarea.net/AVIMetaEdit</url>
-    <url type="repo">https://github.com/MediaArea/AVIMetaEdit</url>
-    <provenance-scope>file-level</provenance-scope>
-    <c2pa-support>none</c2pa-support>
-    <description>Embed and validate metadata in AVI files. Companion tool to BWF MetaEdit for video. Supports INFO chunk and BEXT-equivalent metadata in AVI RIFF structure.</description>
-    <tcr4cap-comments>
-      <awareness>AVI MetaEdit embeds and displays metadata in AVI files.</awareness>
-      <tamper-evidence>AVI MetaEdit embeds metadata but does not provide cryptographic tamper-evidence for the metadata it writes.</tamper-evidence>
-      <binding>AVI MetaEdit embeds metadata directly in the AVI file structure. No cryptographic binding between metadata fields and video content.</binding>
-      <ai-attribution>No structured AI attribution vocabulary in AVI metadata. AI documentation requires repurposing of general metadata fields.</ai-attribution>
-      <substantiation>Outputs are structured metadata conforming to AVI RIFF conventions.</substantiation>
-      <interoperability>Public Domain / CC0. Companion to BWF MetaEdit. Limited to AVI format.</interoperability>
-    </tcr4cap-comments>
-  </tool>
-
   <!-- Transcoding Tools -->
 
   <tool id="ffmpeg">
