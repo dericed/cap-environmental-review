@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry kind="mechanisms" version="1.0">
+
+  <mechanism id="flac-features">
+    <name>FLAC Specific Integrity Features</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">The STREAMINFO block is embedded at a fixed offset in the file and can be overwritten in place without re-encoding the audio stream. Its field values are derived from the audio stream at encode time; overwriting them without re-encoding produces a file whose metadata no longer accurately describes the audio frames.</file-level>
+      <content-level type="fixed">The MD5 signature of unencoded audio and per-frame CRC values are computed at encode time and are fixed for the lifetime of the file unless the audio stream is re-encoded.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="checksum">MD5 signature of unencoded PCM audio stored in STREAMINFO; CRC-8 per frame header and CRC-16 per frame footer. Recomputable by any conformant FLAC decoder (e.g. flac --test, ffmpeg).</media-integrity>
+      <metadata-integrity type="none">No integrity mechanism covers FLAC metadata blocks (Vorbis Comment, ID3, GEOB, PICTURE). Metadata can be altered without affecting the audio-data checksums.</metadata-integrity>
+      <chain-of-custody type="none">No provenance chain or signing mechanism in the base FLAC format specification.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000198" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
+    <metadata-values>
+      <field name="MD5 signature" cap-concept="media-integrity">Stored in STREAMINFO block; MD5 of unencoded raw PCM audio data.</field>
+      <field name="CRC-8" cap-concept="media-integrity">Per audio frame header; covers frame header bytes up to but not including the CRC byte itself.</field>
+      <field name="CRC-16" cap-concept="media-integrity">Per audio frame footer; covers encoded frame data.</field>
+    </metadata-values>
+    <description>FLAC encodes integrity data into the bitstream as defined in RFC 9639. The STREAMINFO metadata block stores an MD5 signature of the unencoded (raw PCM) audio data. Each audio frame header carries a CRC-8 and each frame footer carries a CRC-16 of the encoded frame. These values are computed at the time of encoding and cover audio data only and do not cover any metadata blocks.</description>
+    <tcr4cap-comments>
+      <awareness>STREAMINFO MD5 and per-frame CRCs are defined in RFC 9639 and are present in all conformant FLAC files. These fields are not mapped to CAP vocabularies in any current CAP framework or policy document.</awareness>
+      <tamper-evidence>Any modification to the audio bitstream would produce a different MD5 or CRC value during verification, detectable by recomputing against the stored values. Metadata blocks are not covered.</tamper-evidence>
+      <binding>The MD5 is computed over the unencoded audio content at the time of encoding and stored in the same file. No mechanism links the MD5 to an external identity or signing authority.</binding>
+      <ai-attribution>No fields in the FLAC format specification address AI generation, training, or processing provenance.</ai-attribution>
+      <substantiation>No fields in the FLAC format specification link to external policies, transformation histories, or rights statements.</substantiation>
+      <interoperability>Defined in RFC 9639 (IETF). Implemented by all conformant FLAC encoders and decoders. Verifiable by flac --test, ffmpeg, and any FLAC-capable tool.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bwf-features">
+    <name>BWF Specific Features (BEXT Chunk)</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">The BEXT chunk can be written or updated without re-encoding the audio data.</file-level>
+      <content-level type="append">CodingHistory is conventionally appended on each processing step; other BEXT fields are overwritten on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">No included audio-data integrity mechanism in the BWF/BEXT specification itself. Audio-data MD5 is a tool-level addition (see bwf-md5 mechanism).</media-integrity>
+      <metadata-integrity type="none">BEXT fields have no integrity protection; any field can be overwritten without detection.</metadata-integrity>
+      <chain-of-custody type="none">No signing or provenance chain mechanism in the BWF/BEXT specification. CodingHistory is a conventional append-only log with no enforcement.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <metadata-values>
+      <field name="Originator" cap-concept="actor-identity">Name of the originating organization; 32 bytes.</field>
+      <field name="OriginatorReference" cap-concept="asset-identity">Unique identifier assigned by the originator; 32 bytes.</field>
+      <field name="OriginationDate" cap-concept="creation-datetime">Date of origination in YYYY-MM-DD format.</field>
+      <field name="OriginationTime" cap-concept="creation-datetime">Time of origination in HH-MM-SS format.</field>
+      <field name="CodingHistory" cap-concept="transformation-history">Free-text log of processing steps; conventionally appended on each encode or transfer.</field>
+    </metadata-values>
+    <description>The Broadcast Extension (BEXT) chunk is defined in EBU Tech 3285 and carries originator identity, originator reference, origination date and time, time reference (sample offset), UMID, loudness values, and a CodingHistory field documenting the processing chain. BEXT is the primary provenance carrier in BWF files. Fields can be silently overwritten; changes are not detectable without an external fixity record or audio-data MD5 comparison.</description>
+    <tcr4cap-comments>
+      <awareness>BEXT fields are defined in EBU Tech 3285 and are present in all conformant BWF files. Originator, OriginatorReference, OriginationDate/Time, and CodingHistory are recognized provenance fields in broadcast and archival audio workflows. FADGI and EBU publish guidelines for consistent field use.</awareness>
+      <tamper-evidence>BEXT fields have no integrity protection. Any field can be overwritten without detection. CodingHistory is appended by convention; no mechanism enforces append-only behavior or detects deletion of history entries.</tamper-evidence>
+      <binding>BEXT is embedded in the RIFF container alongside the audio data. No cryptographic mechanism links BEXT field values to the audio bitstream.</binding>
+      <ai-attribution>No fields in the BEXT specification address AI generation, training, or processing provenance. CodingHistory is a free-text field that could carry AI processing notes by convention.</ai-attribution>
+      <substantiation>CodingHistory documents processing steps in a structured free-text format. UMID provides a globally unique material identifier. No mechanism links BEXT fields to external policies or trust anchors.</substantiation>
+      <interoperability>Defined in EBU Tech 3285. Implemented across broadcast and archival audio tools. FADGI and EBU publish open guidelines for field use.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="jpeg-features">
+    <name>JPEG Specific Features (APP Segments)</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">APP segments can be written or replaced without re-encoding the image data.</file-level>
+      <content-level type="overwrite">Individual APP segment contents are replaced on write; C2PA APP11 is append-only at the manifest store level.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">No image-data integrity mechanism in the base JPEG/JFIF specification.</media-integrity>
+      <metadata-integrity type="none">APP segments have no integrity protection in the base specification; segments can be added, removed, or replaced without detection.</metadata-integrity>
+      <chain-of-custody type="signed">C2PA manifest store in APP11 provides cryptographic signing and hard binding to image content when implemented.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000017" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml"/>
+    <fdd-ref id="FDD000018" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml"/>
+    <fdd-ref id="FDD000147" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml"/>
+    <metadata-values>
+      <field name="APP1 (0xFFE1) — EXIF" cap-concept="technical-provenance">Carries EXIF IFD structure with capture device, settings, GPS, and datetime fields.</field>
+      <field name="APP1 (0xFFE1) — XMP" cap-concept="provenance-chain">Carries XMP RDF/XML packet including xmpMM:History, xmpMM:DerivedFrom, and IPTC AI fields.</field>
+      <field name="APP13 (0xFFED) — IPTC-IIM" cap-concept="actor-identity">Carries IPTC Information Interchange Model fields including creator and rights.</field>
+      <field name="APP11 (0xFFEB) — C2PA" cap-concept="provenance-chain">Carries C2PA manifest store in JUMBF container; multiple sequential APP11 segments used for large manifests.</field>
+    </metadata-values>
+    <description>JPEG defines a segmented binary structure with APP marker segments for metadata. APP1 carries EXIF and XMP; APP13 carries IPTC-IIM; APP11 carries C2PA manifest stores in a JUMBF container. These are intrinsic features of the JPEG/JFIF specification.</description>
+    <tcr4cap-comments>
+      <awareness>APP segment structure is defined in ISO/IEC 10918. APP11 C2PA embedding is defined in the C2PA Technical Specification Appendix A. APP1 EXIF, XMP, and APP13 IPTC-IIM are widely implemented across image tools.</awareness>
+      <tamper-evidence>APP segments can be added, removed, or replaced without detection in the base format. C2PA APP11 provides cryptographic tamper-evidence when present; any modification to the signed content invalidates the manifest signature.</tamper-evidence>
+      <binding>C2PA APP11 provides hard binding: the manifest contains a hash of the image content, cryptographically linking the manifest to the specific image bitstream at signing time. EXIF and XMP are structurally embedded but not cryptographically bound.</binding>
+      <ai-attribution>C2PA AI attribution assertions (c2pa.ai.generatedWith, training data references) are carried in APP11 when present. IPTC 2025.1 AI fields are carried in XMP via APP1.</ai-attribution>
+      <substantiation>C2PA manifest store in APP11 preserves transformation history with external trust anchor support. XMP xmpMM:History and IPTC fields provide additional descriptive provenance.</substantiation>
+      <interoperability>JPEG/JFIF is defined in ISO/IEC 10918 and widely implemented. APP11 C2PA is supported by c2patool and c2pa-rs reference implementations.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="png-features">
+    <name>PNG Specific Features (Chunks)</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">PNG chunks can be added, replaced, or removed without re-encoding the image data.</file-level>
+      <content-level type="overwrite">Metadata chunks are replaced on write; caBX C2PA chunk is append-only at the manifest store level.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="checksum">CRC-32 per chunk covers each chunk's type and data fields. Detects accidental corruption of individual chunks including image data chunks.</media-integrity>
+      <metadata-integrity type="checksum">CRC-32 covers metadata chunks (tEXt, iTXt, eXIf, caBX) as well as image data chunks. Does not detect intentional replacement of a chunk with a recalculated CRC.</metadata-integrity>
+      <chain-of-custody type="signed">C2PA manifest store in caBX chunk provides cryptographic signing and hard binding to image content when implemented.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000153" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000153.shtml"/>
+    <metadata-values>
+      <field name="caBX chunk" cap-concept="provenance-chain">Carries C2PA manifest store in JUMBF container.</field>
+      <field name="eXIf chunk" cap-concept="technical-provenance">Carries EXIF IFD structure with capture device, settings, and datetime fields.</field>
+      <field name="iTXt chunk (XMP)" cap-concept="provenance-chain">Carries XMP RDF/XML packet including xmpMM:History, xmpMM:DerivedFrom, and IPTC AI fields.</field>
+      <field name="CRC-32 (per chunk)" cap-concept="media-integrity">32-bit cyclic redundancy check covering each chunk's type and data.</field>
+    </metadata-values>
+    <description>PNG defines a chunk-based binary structure. The custom caBX chunk carries C2PA manifest stores. The iTXt chunk carries XMP metadata. EXIF data is carried in an eXIf chunk. PNG includes a CRC-32 per chunk for structural integrity. These are intrinsic features of the PNG specification (ISO/IEC 15948).</description>
+    <tcr4cap-comments>
+      <awareness>PNG chunk structure is defined in ISO/IEC 15948. caBX C2PA embedding is defined in the C2PA Technical Specification. Per-chunk CRC-32 is implemented by all conformant PNG encoders and decoders.</awareness>
+      <tamper-evidence>Per-chunk CRC-32 detects accidental corruption of any chunk. C2PA caBX provides cryptographic tamper-evidence when present. CRC-32 does not detect intentional replacement of a chunk with a recalculated CRC.</tamper-evidence>
+      <binding>C2PA caBX provides hard binding: the manifest contains a hash of the image content. Per-chunk CRC-32 binds each chunk's integrity check to its content but is not a cryptographic signature.</binding>
+      <ai-attribution>C2PA AI attribution assertions are carried in caBX when present. IPTC 2025.1 AI fields are carried in XMP via iTXt.</ai-attribution>
+      <substantiation>C2PA manifest store in caBX preserves transformation history. XMP in iTXt provides additional descriptive provenance.</substantiation>
+      <interoperability>PNG is defined in ISO/IEC 15948 and widely implemented. caBX C2PA is supported by c2patool and c2pa-rs reference implementations.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="tiff-features">
+    <name>TIFF Specific Features (IFD Tags)</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">IFD tags can be written or updated without re-encoding the image data.</file-level>
+      <content-level type="overwrite">Tag values are replaced on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">No image-data integrity mechanism in the TIFF 6.0 specification.</media-integrity>
+      <metadata-integrity type="none">IFD tags have no integrity protection; any tag can be overwritten without detection.</metadata-integrity>
+      <chain-of-custody type="none">No signing or provenance chain mechanism in the TIFF 6.0 specification. No C2PA embedding defined.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000022" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml"/>
+    <fdd-ref id="FDD000145" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000145.shtml"/>
+    <metadata-values>
+      <field name="Tag 306 (DateTime)" cap-concept="creation-datetime">Date and time of image creation in YYYY:MM:DD HH:MM:SS format.</field>
+      <field name="Tag 271 (Make) / Tag 272 (Model)" cap-concept="actor-identity">Camera manufacturer and model name.</field>
+      <field name="Tag 700 (XMP)" cap-concept="provenance-chain">XMP RDF/XML packet; carries xmpMM:History, xmpMM:DerivedFrom, IPTC AI fields, and other provenance vocabularies.</field>
+      <field name="Tag 33723 (IPTC-IIM)" cap-concept="actor-identity">IPTC Information Interchange Model binary data block.</field>
+      <field name="SubIFD (EXIF)" cap-concept="technical-provenance">EXIF IFD structure with capture device, settings, and GPS fields.</field>
+    </metadata-values>
+    <description>TIFF uses an Image File Directory (IFD) tag structure to carry metadata. EXIF metadata is carried in a SubIFD; XMP is carried in tag 700; IPTC is carried in tag 33723. No C2PA embedding is defined in the current TIFF specification; C2PA is delivered via sidecar for TIFF assets.</description>
+    <tcr4cap-comments>
+      <awareness>TIFF IFD tag structure is defined in TIFF 6.0. Tag 700 XMP and tag 33723 IPTC are widely implemented in archival imaging tools. No C2PA embedding path exists in the current specification.</awareness>
+      <tamper-evidence>IFD tags have no integrity protection and can be silently overwritten or stripped without detection.</tamper-evidence>
+      <binding>Metadata tags are structurally embedded in the IFD alongside the image data but there is no cryptographic binding between tag values and the image bitstream.</binding>
+      <ai-attribution>IPTC 2025.1 AI fields can be carried via XMP in tag 700. No purpose-built AI attribution fields exist in the TIFF 6.0 specification.</ai-attribution>
+      <substantiation>Tag 700 XMP and tag 33723 IPTC provide descriptive provenance fields. No mechanism links IFD tags to external policies or trust anchors.</substantiation>
+      <interoperability>TIFF 6.0 is an open specification widely implemented across archival imaging tools and repository systems.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="mp4-features">
+    <name>MP4 / ISOBMFF Specific Features (Atoms)</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">Metadata atoms can be written or updated without re-encoding the media data.</file-level>
+      <content-level type="overwrite">Metadata atom values are replaced on write; C2PA uuid atom is append-only at the manifest store level.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">No media-data integrity mechanism in the ISO 14496-12 base specification.</media-integrity>
+      <metadata-integrity type="none">Metadata atoms have no integrity protection in the base specification.</metadata-integrity>
+      <chain-of-custody type="signed">C2PA manifest store in uuid atom provides cryptographic signing and hard binding to media content when implemented.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000155" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml"/>
+    <fdd-ref id="FDD000525" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000525.shtml"/>
+    <metadata-values>
+      <field name="uuid atom (C2PA UUID)" cap-concept="provenance-chain">Carries C2PA manifest store in JUMBF container; UUID value defined in C2PA Technical Specification.</field>
+      <field name="uuid atom (XMP UUID)" cap-concept="provenance-chain">Carries XMP RDF/XML packet including xmpMM:History, xmpMM:DerivedFrom, and IPTC AI fields.</field>
+      <field name="udta / moov metadata atoms" cap-concept="creation-datetime">Carries creation date, encoder identity, and copyright fields.</field>
+    </metadata-values>
+    <description>MP4 and ISO Base Media File Format use a hierarchical atom (box) structure. C2PA manifest stores are embedded in a uuid atom with a defined C2PA UUID. Descriptive metadata is carried in udta and moov atoms. XMP can be carried in a uuid atom with the XMP UUID. Covers MP4, MOV, MJ2, 3GP, and other ISOBMFF derivatives.</description>
+    <tcr4cap-comments>
+      <awareness>ISOBMFF atom structure is defined in ISO 14496-12. C2PA uuid atom embedding is defined in the C2PA Technical Specification Appendix A. uuid atom XMP embedding is defined in the XMP specification.</awareness>
+      <tamper-evidence>Metadata atoms have no integrity protection in the base specification. C2PA uuid atom provides cryptographic tamper-evidence when present; modification of the media data invalidates the C2PA hard binding.</tamper-evidence>
+      <binding>C2PA uuid atom provides hard binding: the manifest contains a hash of the media content. udta and moov metadata atoms are structurally embedded but not cryptographically bound.</binding>
+      <ai-attribution>C2PA AI attribution assertions are carried in the uuid atom when present.</ai-attribution>
+      <substantiation>C2PA manifest store in uuid atom preserves transformation history with external trust anchor support.</substantiation>
+      <interoperability>ISO 14496-12 is an ISO standard. MP4 is widely implemented across broadcast, streaming, and archival video tools. C2PA uuid atom is supported by c2patool and c2pa-rs.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="mkv-features">
+    <name>Matroska Specific Features (EBML Tags, CRC-32, and Attachments)</name>
+    <type>format-specific</type>
+    <editability>
+      <file-level type="embedded-writable">EBML tag elements and attachment elements can be written or updated without re-encoding the media data. The Tags top-level element is structurally independent of the Cluster elements that carry media data.</file-level>
+      <content-level type="overwrite">Tag values are replaced on write. Updating a tag rewrites the Tags element in place or appends a new Tags element; if present, the CRC-32 of the Tags element should be recomputed on any edit.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="checksum">CRC-32 elements are defined in RFC 8794 (EBML) and applied per top-level element in Matroska. RFC 9559 §6.2 states that all Top-Level Elements (SeekHead, Info, Tracks, Chapters, Cluster, Cues, Attachments, Tags) SHOULD include a CRC-32 as their first child element. The CRC-32 covers all element data of the parent element excluding the CRC-32 element itself, using IEEE-CRC-32 (little-endian). FFmpeg writes CRC-32 in all Level 1 elements by default (write_crc32=1). This provides per-element integrity verification but does not constitute a whole-file hash or a cryptographic signature.</media-integrity>
+      <metadata-integrity type="checksum">The Tags top-level element SHOULD carry its own CRC-32 child, covering the tag bytes. This allows detection of accidental corruption of the Tags element. It does not prevent intentional modification; any writer can recompute a valid CRC-32 after altering tag values.</metadata-integrity>
+      <chain-of-custody type="none">No signing or provenance chain mechanism is defined in the current Matroska specification. No C2PA embedding path is defined in RFC 9559.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000342" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml"/>
+    <metadata-values>
+      <field name="TAG / SimpleTag (TagName=DATE_RECORDED)" cap-concept="creation-datetime">The time that the recording began.</field>
+      <field name="TAG / SimpleTag (TagName=DATE_ENCODED)" cap-concept="creation-datetime">The time that encoding of this item was completed.</field>
+      <field name="TAG / SimpleTag (TagName=DATE_TAGGED)" cap-concept="creation-datetime">The time that the tags were written for this item.</field>
+      <field name="TAG / SimpleTag (TagName=DATE_DIGITIZED)" cap-concept="creation-datetime">The time that the item was transferred to a digital medium.</field>
+      <field name="TAG / SimpleTag (TagName=ENCODER)" cap-concept="actor-identity">The software or hardware used to encode this item.</field>
+      <field name="TAG / SimpleTag (TagName=ENCODER_SETTINGS)" cap-concept="actor-identity">A list of the settings used for encoding this item.</field>
+      <field name="TAG / SimpleTag (TagName=ENCODED_BY)" cap-concept="actor-identity">The person or organization that encoded the item.</field>
+      <field name="TAG / SimpleTag (TagName=ORIGINAL)" cap-concept="provenance-chain">Nested container tag describing the original work this item is based on. Any tag may be nested under ORIGINAL to describe the source work.</field>
+      <field name="TAG / SimpleTag (TagName=ORIGINAL_MEDIA_TYPE)" cap-concept="provenance-chain">Describes the original medium type of the source material (e.g., DVD, CD, film).</field>
+      <field name="TAG / SimpleTag (TagName=SAMPLE)" cap-concept="provenance-chain">Nested container tag describing a sample used in the item taken from another work.</field>
+      <field name="TAG / SimpleTag (TagName=COPYRIGHT)" cap-concept="rights">Copyright information as per the copyright holder.</field>
+      <field name="TAG / SimpleTag (TagName=LICENSE)" cap-concept="rights">The license applied to the content (e.g., Creative Commons variants).</field>
+      <field name="TAG / SimpleTag (TagName=TERMS_OF_USE)" cap-concept="rights">The terms of use for this item.</field>
+      <field name="CRC-32 (per top-level element)" cap-concept="media-integrity">IEEE-CRC-32 checksum covering all element data of each top-level EBML element. Written by default by FFmpeg (write_crc32=1). Defined in RFC 8794 §11.3.1.</field>
+      <field name="Attachments / AttachedFile" cap-concept="provenance-chain">Arbitrary file attachment; can carry sidecar metadata files including PREMIS or C2PA manifests.</field>
+    </metadata-values>
+    <description>Matroska uses an EBML structure defined in RFC 9559. Metadata is carried in SimpleTag elements within a Tags master element; the tag vocabulary is defined in the IETF CELLAR working group tags draft. RFC 9559 §6.2 specifies that all top-level elements SHOULD carry a CRC-32 child element (IEEE-CRC-32, covering all sibling element data within the parent); FFmpeg implements this by default. CRC-32 provides per-element corruption detection but is not a cryptographic integrity mechanism and does not prevent intentional modification. The ORIGINAL and SAMPLE nested tag containers allow structured description of source and sample provenance. Attachments can carry arbitrary sidecar files. No C2PA embedding path is defined in the current Matroska specification.</description>
+    <tcr4cap-comments>
+      <awareness>Matroska tag structure and CRC-32 behavior are defined in IETF RFC 9559 and RFC 8794. Tag elements are implemented in mkvtoolnix, FFmpeg, and VLC. No CAP-specific tag vocabulary is defined in the Matroska specification. The ORIGINAL, SAMPLE, and DATE_* tags provide a richer provenance vocabulary than most container formats but are not mapped to any current CAP framework.</awareness>
+      <tamper-evidence>CRC-32 elements on each top-level EBML element detect accidental corruption of that element's data. They do not prevent intentional modification; any writer can recompute a valid CRC-32 after altering content. EBML tag elements have no cryptographic integrity protection.</tamper-evidence>
+      <binding>Tag elements are structurally embedded in the EBML container. CRC-32 binds element content to its checksum at write time but there is no cryptographic binding between tag values and the media data, and no external identity is involved.</binding>
+      <ai-attribution>No AI attribution fields are defined in the Matroska tag vocabulary.</ai-attribution>
+      <substantiation>The ORIGINAL, ORIGINAL_MEDIA_TYPE, SAMPLE, ENCODER, ENCODER_SETTINGS, and DATE_* tags provide a structured record of encoding history and source material. LICENSE and TERMS_OF_USE fields support rights documentation. No mechanism links these values to external policies or trust anchors.</substantiation>
+      <interoperability>Matroska is defined in IETF RFC 9559. Tag vocabulary is defined in the IETF CELLAR tags draft. Widely implemented in FFmpeg, VLC, and mkvtoolnix. CRC-32 verification is supported by mkvinfo and ffprobe.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="vorbis-comment">
+    <name>Vorbis Comment</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">The Vorbis Comment block is embedded in the file and can be rewritten by tooling without re-encoding the primary content.</file-level>
+      <content-level type="overwrite">Fields are single-value and replaced on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">Vorbis Comment carries no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">No integrity protection on the Vorbis Comment block; fields can be silently overwritten without detection.</metadata-integrity>
+      <chain-of-custody type="none">No provenance chain mechanism in the Vorbis Comment specification.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000198" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
+    <metadata-values>
+      <field name="ARTIST" cap-concept="actor-identity">Name of the performing artist or creator.</field>
+      <field name="DATE" cap-concept="creation-datetime">Date of recording or release.</field>
+      <field name="ENCODER" cap-concept="actor-identity">Name and version of the encoding software.</field>
+    </metadata-values>
+    <description>Embedded metadata blocks for human-readable key=value pairs. Fields are single-value and replaced on write. No integrity protection of the block itself. Used by FLAC, Ogg Vorbis, Ogg Opus, and Ogg FLAC.</description>
+    <tcr4cap-comments>
+      <awareness>Vorbis Comment fields are widely understood in audio workflows but there is no standardized mapping to CAP vocabularies.</awareness>
+      <tamper-evidence>Vorbis Comment fields have no integrity protection and can be silently overwritten or stripped without detection.</tamper-evidence>
+      <binding>Fields are structurally embedded in the file but there is no cryptographic binding between comment values and the audio content.</binding>
+      <ai-attribution>No defined AI attribution fields; any AI documentation must repurpose general comment fields with no standardized vocabulary.</ai-attribution>
+      <substantiation>Values are readable but there is no mechanism for linking to external policies or transformation histories.</substantiation>
+      <interoperability>Vorbis Comment is an open, widely implemented specification; fields are plain text and broadly readable.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="id3-geob-c2pa">
+    <name>ID3 General Encapsulated Object (GEOB) — C2PA</name>
+    <type>embedded-c2pa</type>
+    <editability>
+      <file-level type="embedded-writable">The GEOB frame can be written or rewritten within the host file without re-encoding the primary content.</file-level>
+      <content-level type="append-only">The C2PA manifest store within the GEOB payload is append-only; individual signed manifests are immutable once signed, and new manifests are appended on each edit.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="signed">C2PA hard binding links the manifest cryptographically to the audio content via a content hash at signing time.</media-integrity>
+      <metadata-integrity type="signed">Each manifest is cryptographically signed; any modification to the GEOB payload invalidates the signature.</metadata-integrity>
+      <chain-of-custody type="signed">The append-only manifest store preserves the full provenance chain; each manifest references prior manifests as ingredients.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="GEOB frame (MIME type: application/c2pa)" cap-concept="provenance-chain">ID3 GEOB frame carrying the C2PA manifest store binary payload.</field>
+      <field name="c2pa.claim.generator" cap-concept="actor-identity">Software or hardware that generated the C2PA claim; carried within the manifest.</field>
+      <field name="c2pa.actions" cap-concept="transformation-history">Ordered list of actions performed on the asset; carried within the manifest.</field>
+      <field name="c2pa.hash.data" cap-concept="media-integrity">Cryptographic hash of the audio content; provides hard binding within the manifest.</field>
+      <field name="c2pa.ai.generatedWith" cap-concept="ai-attribution">Identity of the AI model used to generate the asset; carried within the manifest.</field>
+    </metadata-values>
+    <description>C2PA manifest store embedded via an ID3 tag using the General Encapsulated Object frame (GEOB). Each edit by a C2PA-capable tool appends a new signed manifest to the store; individual manifests are immutable once signed. The GEOB frame is not covered by FLAC's included checksums (MD5/CRC), so integrity of the manifest depends entirely on the C2PA cryptographic signing chain. Applicable to any format supporting ID3 tags (FLAC, MP3, AIFF).</description>
+    <tcr4cap-comments>
+      <awareness>C2PA is a defined, published standard; the GEOB embedding path is specified in the C2PA Technical Specification, though not yet widely implemented in FLAC-specific tooling.</awareness>
+      <tamper-evidence>Individual manifests are cryptographically signed and immutable; the append-only store preserves the full provenance chain. Tampering with the GEOB payload invalidates the signature.</tamper-evidence>
+      <binding>C2PA hard binding links the manifest cryptographically to the audio content; the GEOB frame provides a standardized embedding location within the ID3 structure.</binding>
+      <ai-attribution>C2PA supports structured AI attribution assertions (c2pa.ai.generatedWith, training data, model identity) within the manifest.</ai-attribution>
+      <substantiation>C2PA manifests can reference external trust anchors and credential issuers; transformation history is preserved in the manifest store across the asset lifecycle.</substantiation>
+      <interoperability>C2PA is an open, published specification; GEOB is a standard ID3 frame; implementation breadth in FLAC tooling is currently limited.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bwf-bext">
+    <name>BWF BEXT Chunk</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">The BEXT chunk is embedded in the WAVE file and can be rewritten by tooling without re-encoding the audio data.</file-level>
+      <content-level type="append">CodingHistory is conventionally appended on each processing step; other BEXT fields are overwritten on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">BEXT carries no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">No integrity protection on the BEXT chunk; fields can be silently overwritten without detection.</metadata-integrity>
+      <chain-of-custody type="none">CodingHistory is a conventional append-only log with no enforcement; no signing or provenance chain mechanism.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <metadata-values>
+      <field name="Originator" cap-concept="actor-identity">Name of the originating organization; 32 bytes.</field>
+      <field name="OriginatorReference" cap-concept="asset-identity">Unique identifier assigned by the originator; 32 bytes.</field>
+      <field name="OriginationDate" cap-concept="creation-datetime">Date of origination in YYYY-MM-DD format.</field>
+      <field name="OriginationTime" cap-concept="creation-datetime">Time of origination in HH-MM-SS format.</field>
+      <field name="UMID" cap-concept="asset-identity">SMPTE Unique Material Identifier; 64 bytes.</field>
+      <field name="CodingHistory" cap-concept="transformation-history">Free-text log of processing steps; conventionally appended on each encode or transfer.</field>
+    </metadata-values>
+    <description>The Broadcast Extension chunk defined in EBU Tech 3285. Carries originator identity, originator reference, origination date and time, time reference (sample offset), UMID, loudness values, and a CodingHistory field. BEXT is the primary provenance carrier in BWF files. Fields can be silently overwritten; changes are not detectable without an external fixity record or audio-data MD5 comparison. Validated against FADGI, EBU, and Microsoft rules by BWF MetaEdit.</description>
+    <tcr4cap-comments>
+      <awareness>BEXT is defined in EBU Tech 3285. Originator, OriginatorReference, OriginationDate/Time, and CodingHistory are recognized provenance fields in broadcast and archival audio workflows. FADGI and EBU publish guidelines for consistent field use.</awareness>
+      <tamper-evidence>BEXT fields have no integrity protection. Any field can be overwritten without detection. CodingHistory is appended by convention; no mechanism enforces append-only behavior or detects deletion of history entries.</tamper-evidence>
+      <binding>BEXT is embedded in the RIFF container alongside the audio data. No cryptographic mechanism links BEXT field values to the audio bitstream.</binding>
+      <ai-attribution>No fields in the BEXT specification address AI generation, training, or processing provenance. CodingHistory is a free-text field that could carry AI processing notes by convention.</ai-attribution>
+      <substantiation>CodingHistory documents processing steps in a structured free-text format. UMID provides a globally unique material identifier. No mechanism links BEXT fields to external policies or trust anchors.</substantiation>
+      <interoperability>Defined in EBU Tech 3285. Implemented across broadcast and archival audio tools. FADGI and EBU publish open guidelines for field use.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bwf-info">
+    <name>BWF LIST-INFO Chunk</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">The LIST-INFO chunk is embedded in the WAVE file and can be rewritten by tooling without re-encoding the audio data.</file-level>
+      <content-level type="overwrite">INFO fields are replaced on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">LIST-INFO carries no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">No integrity protection; fields can be silently overwritten without detection.</metadata-integrity>
+      <chain-of-custody type="none">No provenance chain mechanism in the RIFF INFO specification.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <metadata-values>
+      <field name="ICRD" cap-concept="creation-datetime">Date of creation.</field>
+      <field name="IART" cap-concept="actor-identity">Name of the artist or creator.</field>
+      <field name="ISFT" cap-concept="actor-identity">Name of the software used to create the file.</field>
+      <field name="ICOP" cap-concept="rights">Copyright statement.</field>
+    </metadata-values>
+    <description>The RIFF LIST-INFO chunk carrying standard INFO tags. A secondary metadata carrier in BWF files, complementing BEXT. Fields are plain text with no integrity protection. Less structured than BEXT; no provenance-specific fields. Validated by BWF MetaEdit against Microsoft WAVE specifications.</description>
+    <tcr4cap-comments>
+      <awareness>INFO tags are widely understood as descriptive metadata but are not specifically designed for provenance; no standardized mapping to CAP vocabularies.</awareness>
+      <tamper-evidence>LIST-INFO fields have no integrity protection and can be silently overwritten or stripped without detection.</tamper-evidence>
+      <binding>Fields are structurally embedded in the file but there is no cryptographic binding between INFO field values and the audio content.</binding>
+      <ai-attribution>No defined AI attribution fields; general comment fields could be repurposed but with no standardized vocabulary.</ai-attribution>
+      <substantiation>Plain text fields with no mechanism for linking to external policies or transformation histories.</substantiation>
+      <interoperability>RIFF INFO is an open, widely implemented specification; fields are plain text and broadly readable across tools.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bwf-xml">
+    <name>BWF XML Chunks (aXML / iXML)</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">The aXML and iXML chunks are embedded in the WAVE file and can be rewritten by tooling without re-encoding the audio data.</file-level>
+      <content-level type="overwrite">Each XML chunk's content is replaced on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">aXML and iXML carry no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">No integrity protection on either chunk; content can be silently overwritten without detection.</metadata-integrity>
+      <chain-of-custody type="none">No provenance chain mechanism in the iXML or aXML specifications.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <metadata-values>
+      <field name="aXML / EBU-ISRC" cap-concept="asset-identity">EBU International Standard Recording Code and additional production metadata.</field>
+      <field name="iXML / RECORDER" cap-concept="actor-identity">Name and model of the recording device.</field>
+      <field name="iXML / TRACK_LIST" cap-concept="technical-provenance">List of recorded tracks with channel assignments.</field>
+    </metadata-values>
+    <description>Two distinct XML-carrying chunks supported in BWF/WAVE files. The aXML chunk (EBU Tech 3285 supplement) carries additional XML data including EBU ISRC and production metadata. The iXML chunk carries production sound metadata (scene, take, track names, recorder metadata) per the iXML specification. BWF MetaEdit supports reading and writing both chunk types. Neither chunk has integrity protection of its own.</description>
+    <tcr4cap-comments>
+      <awareness>iXML and aXML/EBU-ISRC are well-established in broadcast production workflows but are not yet addressed in FADGI preservation guidelines.</awareness>
+      <tamper-evidence>aXML and iXML fields have no integrity protection and can be silently overwritten or stripped without detection.</tamper-evidence>
+      <binding>Chunks are structurally embedded in the file but there is no cryptographic binding between chunk content and the audio bitstream.</binding>
+      <ai-attribution>No defined AI attribution fields in iXML or aXML vocabularies.</ai-attribution>
+      <substantiation>iXML provides structured production context (scene, take, recorder); aXML/EBU-ISRC supports rights and identifier linkage. No mechanism for linking to external trust anchors.</substantiation>
+      <interoperability>iXML is an open specification; aXML/EBU-ISRC is an EBU standard. Both are broadly supported in professional audio and DAW tooling.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bwf-md5">
+    <name>BWF Audio-Data MD5 Checksum</name>
+    <type>integrity</type>
+    <editability>
+      <file-level type="embedded-writable">The MD5 value is stored within the WAVE file and can be written, updated, or verified by BWF MetaEdit without re-encoding the audio data.</file-level>
+      <content-level type="fixed">The MD5 is computed over the audio data chunk only and is fixed at write time; it must be recomputed if the audio data changes.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="checksum">MD5 computed over the WAVE audio data chunk payload. Detects changes to the audio bitstream. Recomputable by BWF MetaEdit and any MD5-capable tool given the raw data chunk.</media-integrity>
+      <metadata-integrity type="none">The MD5 covers the audio data chunk only; metadata chunks (BEXT, INFO, XML) are not covered and can be altered without invalidating the checksum.</metadata-integrity>
+      <chain-of-custody type="none">No signing or provenance chain mechanism; the MD5 value itself is not signed and could be replaced along with modified audio data.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <metadata-values>
+      <field name="MD5 digest (audio data chunk)" cap-concept="media-integrity">MD5 hash of the WAVE data chunk payload, excluding chunk ID, size declaration, and optional padding byte.</field>
+    </metadata-values>
+    <description>An MD5 checksum computed over the WAVE file's audio data chunk, embedded within the file by BWF MetaEdit. Detects changes to the audio bitstream. Does not cover metadata chunks (BEXT, INFO, XML). Analogous to FLAC's defined STREAMINFO MD5, but applied at the tool level rather than defined in the format specification. MD5 is not collision-resistant for adversarial contexts.</description>
+    <tcr4cap-comments>
+      <awareness>Audio-data MD5 is a well-understood fixity practice in broadcast and preservation workflows; BWF MetaEdit's implementation follows FADGI guidance.</awareness>
+      <tamper-evidence>Detects accidental or unintentional changes to the audio bitstream. Does not cover metadata chunks. MD5 is not collision-resistant for adversarial tampering; the checksum value itself is not signed.</tamper-evidence>
+      <binding>The MD5 is computed over and embedded alongside the specific audio data chunk, providing a direct integrity link between the checksum value and the audio content within the same file.</binding>
+      <ai-attribution>No relevance to AI attribution; the checksum documents data integrity only.</ai-attribution>
+      <substantiation>Provides a verifiable, reproducible integrity record for the audio bitstream. Supported by FADGI guidance. Exportable for external audit. Limited to the data chunk.</substantiation>
+      <interoperability>MD5 is a universal algorithm; the checksum can be verified by any MD5 tool. The embedding convention is specific to BWF MetaEdit / FADGI practice and not universally standardized across all WAVE-capable tools.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bwf-c2pa">
+    <name>BWF C2PA Chunk</name>
+    <type>embedded-c2pa</type>
+    <editability>
+      <file-level type="embedded-writable">The C2PA chunk is embedded in the WAVE/RIFF file and can be written or replaced by C2PA-capable tooling without re-encoding the audio data.</file-level>
+      <content-level type="append-only">The C2PA Manifest Store is cryptographically signed; individual manifests are immutable once signed. New manifests are appended; prior manifests are preserved as ingredient references.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="signed">C2PA hard binding: the active manifest contains a cryptographic hash of the audio content at signing time. Any modification to the audio data invalidates the binding.</media-integrity>
+      <metadata-integrity type="signed">Each manifest is cryptographically signed using CMS/COSE. Any modification to a manifest's assertions or claim invalidates the signature.</metadata-integrity>
+      <chain-of-custody type="signed">The manifest store is append-only; prior manifests are preserved as ingredient references. The full provenance chain is verifiable against the signing certificate chain and optional timestamp authority.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="C2PA RIFF chunk (fourCC: C2PA)" cap-concept="provenance-chain">RIFF chunk carrying the C2PA Manifest Store binary payload.</field>
+      <field name="c2pa.claim.generator" cap-concept="actor-identity">Software or hardware that generated the C2PA claim.</field>
+      <field name="c2pa.actions" cap-concept="transformation-history">Ordered list of actions performed on the asset.</field>
+      <field name="c2pa.hash.data" cap-concept="media-integrity">Cryptographic hash of the audio content; provides hard binding.</field>
+      <field name="c2pa.ai.generatedWith" cap-concept="ai-attribution">Identity of the AI model used to generate the asset.</field>
+      <field name="c2pa.training-mining" cap-concept="ai-attribution">Assertion about whether the asset may be used for AI training or data mining.</field>
+      <field name="c2pa.claim.signature" cap-concept="provenance-chain">CMS/COSE signature over the claim; includes signing certificate and optional timestamp.</field>
+    </metadata-values>
+    <description>A RIFF chunk with four-character code C2PA carrying a C2PA Manifest Store, as defined in the C2PA Technical Specification (Appendix A). Applies to WAV, BWF, and AVI files. The manifest store contains one or more C2PA Manifests, each comprising a Claim, Claim Signature (COSE/X.509), and Assertions. The chunk is cryptographically signed; any modification to the audio data or metadata invalidates the signature. BWF MetaEdit can detect the chunk's presence but does not author or validate C2PA manifests; authoring is performed by c2patool, c2pa-rs, and compatible capture devices.</description>
+    <tcr4cap-comments>
+      <awareness>C2PA Technical Specification is published by the Coalition for Content Provenance and Authenticity. The C2PA RIFF chunk is defined in the specification Appendix A. No current version of BWF MetaEdit writes this chunk.</awareness>
+      <tamper-evidence>The manifest is cryptographically signed; any modification to the signed content invalidates the signature. Hard binding means any modification to the audio data is detectable.</tamper-evidence>
+      <binding>Hard binding: the C2PA Manifest Store is embedded in the file and the Claim covers a hash of the audio data chunk, cryptographically linking the manifest to the specific audio bitstream at signing time.</binding>
+      <ai-attribution>C2PA defines standardized assertions for AI generative and training provenance: c2pa.ai.generatedWith, c2pa.training-mining, and related fields for model identity and generation parameters.</ai-attribution>
+      <substantiation>Signed assertions are verifiable against a public certificate chain and optional timestamp authority. Manifest history preserves a chain of custody across multiple signing events.</substantiation>
+      <interoperability>C2PA is an open, published specification. Tooling support for WAV/BWF is nascent; c2patool and c2pa-rs support it but broadcast and preservation tools do not yet recognize the chunk.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="xmp-embedded">
+    <name>XMP Embedded Metadata</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">XMP packets are embedded within the host file in a format-specific container (XMP chunk in WAVE, APP1 in JPEG, tag 700 in TIFF, uuid atom in MP4, iTXt in PNG, etc.) and can be rewritten by tooling without re-encoding the primary content.</file-level>
+      <content-level type="overwrite">The XMP packet is replaced on write. The xmpMM:History array supports internal modification history by convention but entries are advisory and not integrity-protected.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">XMP carries no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">XMP packets have no integrity protection; the packet can be silently overwritten or stripped without detection.</metadata-integrity>
+      <chain-of-custody type="none">xmpMM:History provides a conventional modification log; entries are advisory and unverified. No signing mechanism in the XMP specification.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="xmp:CreateDate" cap-concept="creation-datetime">Date and time the resource was originally created.</field>
+      <field name="xmp:CreatorTool" cap-concept="actor-identity">Name and version of the tool used to create or last modify the resource.</field>
+      <field name="xmpMM:DocumentID" cap-concept="asset-identity">Persistent identifier for the document across all versions and renditions.</field>
+      <field name="xmpMM:InstanceID" cap-concept="asset-identity">Identifier for the specific version or rendition of the document.</field>
+      <field name="xmpMM:DerivedFrom" cap-concept="provenance-chain">Reference to the source asset from which this asset was derived; carries DocumentID and InstanceID of the source.</field>
+      <field name="xmpMM:History" cap-concept="transformation-history">Array of ResourceEvent entries documenting modification history; each entry carries action, instanceID, when, and softwareAgent.</field>
+      <field name="dc:rights" cap-concept="rights">Dublin Core rights statement.</field>
+      <field name="dc:source" cap-concept="provenance-chain">Dublin Core source field; reference to a resource from which this resource is derived.</field>
+      <field name="Iptc4xmpExt:DigitalSourceType" cap-concept="ai-attribution">IPTC controlled vocabulary term for the digital source type (e.g. trainedAlgorithmicMedia, compositeSynthetic).</field>
+    </metadata-values>
+    <description>XMP (Extensible Metadata Platform) is an RDF/XML metadata format defined by Adobe and standardized as ISO 16684. Embedded in host files via format-specific containers or stored as standalone .xmp sidecar files. Supports multiple namespaces including Dublin Core (dc:), XMP Basic (xmp:), XMP Media Management (xmpMM:), and IPTC (Iptc4xmpCore/Ext:). The xmpMM:History array provides a conventional provenance record of processing steps. XMP packets have no integrity protection of their own.</description>
+    <tcr4cap-comments>
+      <awareness>XMP is defined in ISO 16684. Implemented across creative, archival, and repository tools. xmpMM:History and xmpMM:DerivedFrom are recognized provenance fields in digital asset management workflows.</awareness>
+      <tamper-evidence>XMP packets have no integrity protection and can be silently overwritten or stripped without detection. xmpMM:History entries are advisory and unverified.</tamper-evidence>
+      <binding>XMP is structurally embedded in host files but there is no cryptographic binding between XMP content and the primary media data. The packet can be removed without affecting the media bitstream.</binding>
+      <ai-attribution>Iptc4xmpExt:DigitalSourceType and IPTC 2025.1 AI fields (AiPrompt, AiSystemUsed, AiSystemVersion) are carried in XMP namespaces. No purpose-built AI attribution fields exist in the core XMP specification itself.</ai-attribution>
+      <substantiation>xmpMM:History and xmpMM:DerivedFrom provide a readable provenance record. XMP sidecar files can be published independently. No mechanism for cryptographic verification of history entries.</substantiation>
+      <interoperability>XMP is defined in ISO 16684. Implemented across all major creative, archival, and repository tools. Embedded in a wide range of format containers.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="exif-embedded">
+    <name>EXIF Embedded Metadata</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">EXIF IFD data can be written or replaced in host files without re-encoding primary content.</file-level>
+      <content-level type="overwrite">EXIF tag values are replaced on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">EXIF carries no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">EXIF data has no integrity protection; tags can be silently overwritten or stripped.</metadata-integrity>
+      <chain-of-custody type="none">No provenance chain mechanism in the EXIF specification.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="FDD000146" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000146.shtml"/>
+    <fdd-ref id="FDD000618" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000618.shtml"/>
+    <metadata-values>
+      <field name="Make (0x010F) / Model (0x0110)" cap-concept="actor-identity">Camera manufacturer and model name.</field>
+      <field name="Software (0x0131)" cap-concept="actor-identity">Name and version of software used to process the image.</field>
+      <field name="DateTimeOriginal (0x9003)" cap-concept="creation-datetime">Date and time the original image was captured.</field>
+      <field name="DateTimeDigitized (0x9004)" cap-concept="creation-datetime">Date and time the image was digitized.</field>
+      <field name="GPSLatitude / GPSLongitude (0x0002 / 0x0004)" cap-concept="creation-location">GPS coordinates of capture location.</field>
+      <field name="ImageUniqueID (0xA420)" cap-concept="asset-identity">Unique identifier assigned to the image by the camera or software.</field>
+      <field name="BodySerialNumber (0xA431)" cap-concept="actor-identity">Serial number of the camera body.</field>
+    </metadata-values>
+    <description>EXIF (Exchangeable Image File Format) is a binary metadata standard defined by CIPA (DC-008) using an IFD tag structure. Records capture device identity, camera settings, GPS coordinates, and datetime. Embedded in JPEG APP1, TIFF SubIFD, PNG eXIf chunk, and HEIF. EXIF data has no integrity protection and can be silently overwritten or stripped.</description>
+    <tcr4cap-comments>
+      <awareness>EXIF is defined by CIPA DC-008. Implemented universally across cameras, phones, and image processing tools. Capture device identity and datetime fields are widely used as provenance indicators in photojournalism and archival workflows.</awareness>
+      <tamper-evidence>EXIF data has no integrity protection and can be silently overwritten or stripped without detection.</tamper-evidence>
+      <binding>EXIF is structurally embedded in host files but there is no cryptographic binding between EXIF tag values and the image content.</binding>
+      <ai-attribution>No AI attribution fields are defined in the EXIF specification. Software (0x0131) can record processing tool identity but has no structured AI attribution vocabulary.</ai-attribution>
+      <substantiation>Capture datetime, GPS, and device fields provide a factual provenance record. No mechanism links EXIF fields to external policies or transformation histories.</substantiation>
+      <interoperability>EXIF is defined by CIPA DC-008. Universally implemented across cameras, phones, and image processing tools.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="iptc-photo">
+    <name>IPTC Photo Metadata</name>
+    <type>embedded-metadata</type>
+    <editability>
+      <file-level type="embedded-writable">IPTC fields carried in XMP can be written or replaced in host files without re-encoding primary content.</file-level>
+      <content-level type="overwrite">IPTC property values are replaced on write.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="none">IPTC carries no media-data integrity mechanism.</media-integrity>
+      <metadata-integrity type="none">IPTC fields carried in XMP have no integrity protection; fields can be silently overwritten or stripped.</metadata-integrity>
+      <chain-of-custody type="none">No provenance chain mechanism in the IPTC Photo Metadata specification.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="Iptc4xmpCore:CreatorContactInfo" cap-concept="actor-identity">Contact information for the image creator.</field>
+      <field name="Iptc4xmpExt:DigitalSourceType" cap-concept="ai-attribution">Controlled vocabulary term for the digital source type (e.g. trainedAlgorithmicMedia, compositeSynthetic).</field>
+      <field name="Iptc4xmpExt:AiPrompt (11.2)" cap-concept="ai-attribution">Text prompt used to generate the image with an AI system; IPTC 2025.1.</field>
+      <field name="Iptc4xmpExt:AiSystemUsed (11.4)" cap-concept="ai-attribution">Name of the AI system used to generate or process the image; IPTC 2025.1.</field>
+      <field name="Iptc4xmpExt:AiSystemVersion (11.5)" cap-concept="ai-attribution">Version of the AI system; IPTC 2025.1.</field>
+      <field name="Iptc4xmpExt:DataMiningPermission (11.11)" cap-concept="rights">Statement of permission for data mining or AI training use; IPTC 2025.1.</field>
+      <field name="Iptc4xmpExt:WebStatement" cap-concept="rights">URL of a rights statement for the image.</field>
+    </metadata-values>
+    <description>The IPTC Photo Metadata Standard defines a vocabulary of fields carried in XMP namespaces (Iptc4xmpCore, Iptc4xmpExt). Version 2025.1 adds dedicated AI fields: AiPrompt (11.2), AiSystemUsed (11.4), AiSystemVersion (11.5), and DataMiningPermission (11.11). Widely used in photojournalism, stock photography, and digital asset management.</description>
+    <tcr4cap-comments>
+      <awareness>IPTC Photo Metadata Standard is published by IPTC. Version 2025.1 AI fields are defined in the IPTC specification. Widely implemented in photo editing, DAM, and publishing tools.</awareness>
+      <tamper-evidence>IPTC fields carried in XMP have no integrity protection and can be silently overwritten or stripped without detection.</tamper-evidence>
+      <binding>IPTC fields are structurally embedded via XMP in host files but there is no cryptographic binding between field values and the image content.</binding>
+      <ai-attribution>Version 2025.1 defines AiPrompt, AiSystemUsed, AiSystemVersion, and DataMiningPermission as purpose-built, standardized AI attribution fields within the IPTC vocabulary.</ai-attribution>
+      <substantiation>IPTC fields provide a structured, readable provenance record. The standard is publicly documented. No mechanism links field values to external trust anchors.</substantiation>
+      <interoperability>IPTC Photo Metadata Standard is an open standard. Implemented in photo editing, DAM, and publishing tools including Adobe Photoshop, Lightroom, and Capture One.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="jumbf-c2pa">
+    <name>JUMBF C2PA Manifest Store (Embedded)</name>
+    <type>embedded-c2pa</type>
+    <editability>
+      <file-level type="embedded-writable">The JUMBF container carrying the C2PA Manifest Store is embedded in the host file via a format-specific mechanism (APP11 in JPEG, caBX in PNG, uuid atom in MP4, C2PA chunk in RIFF/WAV) and can be written or replaced by C2PA-capable tooling without re-encoding the primary content.</file-level>
+      <content-level type="append-only">The C2PA Manifest Store is append-only at the store level; individual signed manifests are immutable once signed. New manifests are appended on each edit; prior manifests are preserved as ingredient references.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="signed">C2PA hard binding: the active manifest contains a cryptographic hash of the asset content at signing time. Any modification to the asset content invalidates the binding.</media-integrity>
+      <metadata-integrity type="signed">Each manifest is cryptographically signed using CMS/COSE. Any modification to a manifest's assertions or claim invalidates the signature.</metadata-integrity>
+      <chain-of-custody type="signed">The manifest store is append-only; prior manifests are preserved as ingredient references. The full provenance chain is verifiable against the signing certificate chain and optional timestamp authority.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="c2pa.claim.generator" cap-concept="actor-identity">Software or hardware that generated the C2PA claim.</field>
+      <field name="c2pa.actions" cap-concept="transformation-history">Ordered list of actions performed on the asset (c2pa.created, c2pa.edited, c2pa.converted, c2pa.transcoded, etc.).</field>
+      <field name="c2pa.ingredient" cap-concept="provenance-chain">Reference to a prior asset version or source asset, including its manifest hash.</field>
+      <field name="c2pa.hash.data" cap-concept="media-integrity">Cryptographic hash of the asset content; provides hard binding between manifest and asset.</field>
+      <field name="c2pa.ai.generatedWith" cap-concept="ai-attribution">Identity of the AI model used to generate the asset.</field>
+      <field name="c2pa.training-mining" cap-concept="ai-attribution">Assertion about whether the asset may be used for AI training or data mining.</field>
+      <field name="c2pa.claim.signature" cap-concept="provenance-chain">CMS/COSE signature over the claim; includes signing certificate and optional timestamp authority token.</field>
+      <field name="c2pa.soft-binding" cap-concept="provenance-chain">Perceptual identifier (watermark or fingerprint) used to link the manifest to the asset when hard binding is not possible or has been broken.</field>
+    </metadata-values>
+    <description>A C2PA Manifest Store carried in a JUMBF (JPEG Universal Metadata Box Format) container, embedded in the host file via a format-specific mechanism. Consolidates the embedding paths for JPEG (APP11), PNG (caBX), MP4/ISOBMFF (uuid atom), and RIFF/WAV (C2PA chunk) under a single mechanism entry, as all use the same JUMBF container and C2PA manifest structure. Each manifest contains assertions, a claim, and a claim signature. Hard binding links the manifest cryptographically to the asset content via hash. The active manifest is the most recently added; prior manifests are preserved as ingredients.</description>
+    <tcr4cap-comments>
+      <awareness>C2PA Technical Specification is published by the Coalition for Content Provenance and Authenticity. Adopted by Adobe, Microsoft, Google, camera manufacturers, and news organizations. Reference implementation available as c2pa-rs under an open-source license.</awareness>
+      <tamper-evidence>Each manifest is cryptographically signed; any modification invalidates the signature. The append-only store preserves the full provenance chain. Hard binding means any modification to the asset content invalidates the active manifest.</tamper-evidence>
+      <binding>Hard binding provides cryptographic linkage between manifest and asset content via content hash. Soft binding provides a defined alternative for non-embeddable assets using perceptual identifiers.</binding>
+      <ai-attribution>C2PA defines purpose-built assertions for AI generative and training provenance: c2pa.ai.generatedWith, c2pa.training-mining, and related fields for model identity and generation parameters.</ai-attribution>
+      <substantiation>Manifest store preserves full transformation history. External trust anchors (credential issuers, TSA) are supported. Public verification is possible via the C2PA trust list and open verification tools.</substantiation>
+      <interoperability>Open published specification. Reference implementation (c2patool, c2pa-rs) available under open-source license. Adopted across image, video, and audio tools and camera manufacturers. Format-specific embedding paths are defined in the C2PA Technical Specification Appendix A.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="sidecar-c2pa">
+    <name>C2PA Sidecar Manifest</name>
+    <type>sidecar-c2pa</type>
+    <editability>
+      <file-level type="sidecar-writable">The C2PA manifest store is stored as a standalone .c2pa file alongside the asset; it can be written or replaced independently of the asset file.</file-level>
+      <content-level type="append-only">The C2PA Manifest Store within the sidecar is append-only; individual signed manifests are immutable once signed.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="signed">C2PA hard binding: the active manifest contains a cryptographic hash of the asset content. Any modification to the asset content invalidates the binding. The sidecar file can be separated from the asset, breaking the association.</media-integrity>
+      <metadata-integrity type="signed">Each manifest is cryptographically signed; any modification to the sidecar payload invalidates the signature.</metadata-integrity>
+      <chain-of-custody type="signed">The manifest store is append-only; prior manifests are preserved as ingredient references. Verifiable against the signing certificate chain and optional timestamp authority. Association with the asset depends on file management conventions.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="c2pa.claim.generator" cap-concept="actor-identity">Software or hardware that generated the C2PA claim.</field>
+      <field name="c2pa.actions" cap-concept="transformation-history">Ordered list of actions performed on the asset.</field>
+      <field name="c2pa.hash.data" cap-concept="media-integrity">Cryptographic hash of the asset content; provides hard binding to the associated asset file.</field>
+      <field name="c2pa.ai.generatedWith" cap-concept="ai-attribution">Identity of the AI model used to generate the asset.</field>
+      <field name="c2pa.training-mining" cap-concept="ai-attribution">Assertion about whether the asset may be used for AI training or data mining.</field>
+      <field name="c2pa.claim.signature" cap-concept="provenance-chain">CMS/COSE signature over the claim; includes signing certificate and optional timestamp authority token.</field>
+    </metadata-values>
+    <description>A C2PA Manifest Store stored as a standalone .c2pa file alongside the asset, used when embedding in the asset file is not possible or not desired (e.g. for TIFF, camera RAW formats, or read-only assets). The sidecar carries the same JUMBF-encoded manifest store as the embedded path. Hard binding via content hash links the sidecar to the specific asset bitstream, but the physical association between sidecar and asset depends on file management conventions; the sidecar can be separated from the asset without invalidating the manifest signatures.</description>
+    <tcr4cap-comments>
+      <awareness>C2PA sidecar delivery is defined in the C2PA Technical Specification. Used for formats where embedding is not defined or not practical.</awareness>
+      <tamper-evidence>Each manifest is cryptographically signed; modification of the sidecar payload invalidates the signature. The sidecar can be deleted or separated from the asset without detection at the file level.</tamper-evidence>
+      <binding>Hard binding via content hash links the sidecar to the specific asset bitstream. Physical co-location of sidecar and asset depends on file management conventions and is not enforced by the format.</binding>
+      <ai-attribution>C2PA AI attribution assertions are carried in the sidecar manifest store identically to the embedded path.</ai-attribution>
+      <substantiation>Manifest store preserves full transformation history. External trust anchors are supported. Sidecar files can be published or transferred independently of the asset.</substantiation>
+      <interoperability>C2PA sidecar is defined in the open C2PA Technical Specification. Supported by c2patool and c2pa-rs. Sidecar association conventions vary across repository and DAM systems.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="sidecar-premis">
+    <name>PREMIS Sidecar / Embedded Event Record</name>
+    <type>sidecar-metadata</type>
+    <editability>
+      <file-level type="sidecar-writable">PREMIS documents are standalone XML files managed independently of the media assets they describe, or embedded within a METS wrapper.</file-level>
+      <content-level type="append">Preservation events are appended to the PREMIS document over the asset lifecycle; existing events are not modified by convention.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="external-only">PREMIS can record fixity values (checksums) for described objects in the objectCharacteristics/fixity element, but does not compute or verify them itself. Verification depends on external tooling.</media-integrity>
+      <metadata-integrity type="none">PREMIS XML has no integrity protection; the document can be modified without detection. Integrity depends on the repository or packaging layer.</metadata-integrity>
+      <chain-of-custody type="external-only">PREMIS event records provide a structured provenance chain but entries are not cryptographically signed. Integrity of the event record depends on the repository audit log or packaging layer (e.g. BagIt fixity).</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="object/objectIdentifier" cap-concept="asset-identity">Persistent identifier for the described object.</field>
+      <field name="object/objectCharacteristics/fixity" cap-concept="media-integrity">Fixity algorithm and digest value for the described object.</field>
+      <field name="object/objectCharacteristics/format" cap-concept="technical-provenance">Format name, version, and registry designation (e.g. PRONOM PUID) of the described object.</field>
+      <field name="event/eventType" cap-concept="transformation-history">Type of preservation event (e.g. ingestion, normalization, fixity check, deletion).</field>
+      <field name="event/eventDateTime" cap-concept="transformation-history">Date and time of the preservation event.</field>
+      <field name="event/eventOutcomeInformation" cap-concept="transformation-history">Outcome of the event (success, failure) and detail notes.</field>
+      <field name="agent/agentIdentifier" cap-concept="actor-identity">Identifier for the agent (person, organization, or software) responsible for the event.</field>
+      <field name="rights/rightsStatement" cap-concept="rights">Rights basis and rights granted for the described object.</field>
+    </metadata-values>
+    <description>PREMIS (Preservation Metadata: Implementation Strategies) is an XML schema defined by the Library of Congress for recording preservation metadata. Models Objects, Events, Agents, and Rights. PREMIS events map conceptually to C2PA actions (c2pa.created, c2pa.converted, c2pa.edited); PREMIS agent maps to C2PA softwareAgent or person assertions. Generated by preservation systems including Archivematica, DSpace, and Fedora.</description>
+    <tcr4cap-comments>
+      <awareness>PREMIS Data Dictionary is published by the Library of Congress. Implemented in Archivematica, DSpace, Fedora, and other repository systems. Event types and agent types are defined vocabularies.</awareness>
+      <tamper-evidence>PREMIS XML has no integrity protection. The document can be modified without detection. Tamper-evidence depends on the repository or packaging layer (e.g. BagIt fixity, audit logs).</tamper-evidence>
+      <binding>PREMIS Object elements reference described files by identifier and path. Fixity values in objectCharacteristics/fixity link the PREMIS record to a specific file state, but the linkage is not cryptographically enforced within the PREMIS document itself.</binding>
+      <ai-attribution>No purpose-built AI attribution fields in the PREMIS Data Dictionary. The agent/agentType vocabulary could accommodate AI agents; eventType could accommodate AI processing events by convention.</ai-attribution>
+      <substantiation>PREMIS event records provide a structured, policy-driven transformation history. The PREMIS Data Dictionary is an open standard. Event records are auditable by repository administrators.</substantiation>
+      <interoperability>PREMIS Data Dictionary is published by the Library of Congress as an open standard. Implemented across major digital preservation systems and repository platforms.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+  <mechanism id="bagit-features">
+    <name>BagIt Package Fixity</name>
+    <type>package-integrity</type>
+    <editability>
+      <file-level type="package-writable">BagIt manifests are plain text files within the bag directory structure; they can be regenerated when payload files change.</file-level>
+      <content-level type="fixed">Manifest entries are computed at bag creation time and are fixed for the lifetime of the bag; any change to a payload file requires regenerating the manifest.</content-level>
+    </editability>
+    <verifiability>
+      <media-integrity type="checksum">Manifest files (manifest-md5.txt, manifest-sha256.txt, etc.) record checksums for all payload files. Any modification to a payload file produces a checksum mismatch detectable by bag validation.</media-integrity>
+      <metadata-integrity type="checksum">Tag manifests (tagmanifest-*.txt) record checksums for all tag files including bag-info.txt and fetch.txt. Modification of tag files is detectable by tag manifest validation.</metadata-integrity>
+      <chain-of-custody type="external-only">BagIt provides no signing mechanism; the integrity of the bag depends on the checksum algorithm and the security of the storage environment. Chain of custody depends on repository audit logs and transfer records.</chain-of-custody>
+    </verifiability>
+    <fdd-ref id="none" status="none"/>
+    <metadata-values>
+      <field name="manifest-*.txt entries" cap-concept="media-integrity">Checksum algorithm and digest for each payload file; one entry per file.</field>
+      <field name="tagmanifest-*.txt entries" cap-concept="metadata-integrity">Checksum algorithm and digest for each tag file.</field>
+      <field name="bag-info.txt / Bagging-Date" cap-concept="creation-datetime">Date the bag was created.</field>
+      <field name="bag-info.txt / Source-Organization" cap-concept="actor-identity">Name of the organization that created the bag.</field>
+      <field name="bag-info.txt / External-Identifier" cap-concept="asset-identity">Identifier assigned to the bag by the source organization.</field>
+      <field name="bag-info.txt / Payload-Oxum" cap-concept="media-integrity">Octet count and stream count of the payload; used for quick validation.</field>
+      <field name="fetch.txt" cap-concept="provenance-chain">List of URLs and expected sizes for payload files to be fetched; used for holey bags.</field>
+    </metadata-values>
+    <description>BagIt (RFC 8493) is a hierarchical file packaging format for reliable digital transfer and storage. A bag contains a payload directory, manifest files recording checksums for all payload files, tag files carrying descriptive metadata, and tag manifest files recording checksums for tag files. Operates at the package level; does not interact with file-level metadata mechanisms. Supported algorithms include MD5, SHA-1, SHA-256, and SHA-512.</description>
+    <tcr4cap-comments>
+      <awareness>BagIt is defined in IETF RFC 8493. Widely adopted in digital preservation, library, and archival transfer workflows. Implemented in bagit-python, Bagger, and Archivematica.</awareness>
+      <tamper-evidence>Manifest checksums detect modification of any payload or tag file. No signing mechanism; the manifest files themselves could be replaced along with modified payload files without detection at the BagIt level.</tamper-evidence>
+      <binding>Manifest entries bind each checksum to a specific file path within the bag. No cryptographic binding between the bag as a whole and an external identity or signing authority.</binding>
+      <ai-attribution>No AI attribution fields in the BagIt specification. bag-info.txt custom fields could carry AI processing notes by convention.</ai-attribution>
+      <substantiation>Manifest files provide a verifiable, reproducible integrity record for all payload and tag files. bag-info.txt carries descriptive provenance fields. No mechanism for linking to external trust anchors.</substantiation>
+      <interoperability>BagIt is defined in IETF RFC 8493. Implemented across digital preservation, library, and archival transfer tools and systems.</interoperability>
+    </tcr4cap-comments>
+  </mechanism>
+
+</registry>

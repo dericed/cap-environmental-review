@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry kind="tools" version="1.0">
+
+  <!-- Identification Tools -->
+
+  <tool id="siegfried">
+    <name>Siegfried</name>
+    <type>Identification Tools</type>
+    <version release-date="2026-01-23">1.11.4</version>
+    <license>Apache-2.0</license>
+    <url type="homepage">https://www.itforarchivists.com/siegfried</url>
+    <url type="repo">https://github.com/richardlehane/siegfried</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Signature-based file format identification tool using PRONOM, LOC FDD, and Wikidata signatures. Outputs format identification results as JSON, CSV, or YAML. Widely used in digital preservation ingest workflows.</description>
+    <tcr4cap-comments>
+      <awareness>Siegfried identifies file formats against PRONOM and FDD signatures. Siegfried has no C2PA or provenance-specific awareness beyond format identification.</awareness>
+      <tamper-evidence>Siegfried performs format identification only and does not assess or verify metadata integrity or tamper-evidence.</tamper-evidence>
+      <binding>No binding mechanism. Format identification is based on file signatures.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>Outputs are structured and reproducible. Format identification results are aligned with PRONOM and FDD.</substantiation>
+      <interoperability>Apache-2.0. Widely implemented in digipres workflows. Outputs common, open formats: JSON, CSV, YAML.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="fido">
+    <name>FIDO</name>
+    <type>Identification Tools</type>
+    <version release-date="2022-12-22">1.6.1</version>
+    <license>Apache-2.0</license>
+    <url>https://github.com/openpreserve/fido</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Format Identification for Digital Objects. Python-based PRONOM signature tool from Open Preservation Foundation. Outputs PUID identifiers for identified formats.</description>
+    <tcr4cap-comments>
+      <awareness>FIDO identifies file formats against PRONOM signatures. No C2PA or provenance-specific awareness beyond format identification.</awareness>
+      <tamper-evidence>FIDO performs format identification only and does not assess or verify metadata integrity or tamper-evidence.</tamper-evidence>
+      <binding>No binding mechanism. Format identification is based on file signatures.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>Outputs are structured and format identification results are aligned with PRONOM.</substantiation>
+      <interoperability>Apache-2.0. Python-based. Widely implemented in digipres workflows.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Characterization Tools -->
+
+  <tool id="mediainfo">
+    <name>MediaInfo</name>
+    <type>Characterization Tools</type>
+    <version release-date="2026-05-12">26.05</version>
+    <license>BSD-2-Clause</license>
+    <url>https://mediaarea.net/en/MediaInfo</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>detect-parse</c2pa-support>
+    <description>Technical metadata extraction for audio and video files. As of December 2025 can detect and parse C2PA metadata in JPEG, PNG, and WAV. Outputs technical metadata as XML, JSON, HTML, or plain text. Widely used in broadcast, archives, and repository workflows.</description>
+    <tcr4cap-comments>
+      <awareness>MediaInfo extracts and reports technical metadata including C2PA detection and parsing (as of December 2025). Widely used in broadcast and archive workflows.</awareness>
+      <tamper-evidence>MediaInfo can detect and report C2PA manifest presence. MediaInfo does not perform cryptographic verification of C2PA signatures.</tamper-evidence>
+      <binding>MediaInfo reports C2PA manifest presence and characteristics, but does not verify the cryptographic binding between manifest and asset content.</binding>
+      <ai-attribution>MediaInfo can report C2PA AI attribution assertions when present and does not generate or verify them.</ai-attribution>
+      <substantiation>Outputs are structured and technical metadata reports are reproducible. Widely used as an authoritative tool in preservation workflows for identifying the technical characteristics of audiovisual files.</substantiation>
+      <interoperability>BSD-2-Clause. Widely implemented across broadcast, archive, and repository tools. Outputs XML, JSON, HTML, plain text.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="exiftool">
+    <name>ExifTool</name>
+    <type>Characterization Tools</type>
+    <version release-date="2026-05-27">13.59</version>
+    <license>GPL/Artistic</license>
+    <url>https://exiftool.org</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>detect-parse</c2pa-support>
+    <description>Reads and writes metadata in image, audio, and video files. Supports EXIF, IPTC, XMP, and many other mechanisms. C2PA/JUMBF metadata can be read and structurally parsed from JPEG, PNG, TIFF, DNG, MP4, MOV, HEIF, AVIF, WAV, AVI, WebP, PDF, SVG, GIF, and ID3v2. Exiftool can parse the JUMBF hierarchy and express individual CBOR assertion fields as structured tags. C2PA JUMBF data can be deleted from writable formats. ExifTool does not write or cryptographically verify C2PA manifests.</description>
+    <tcr4cap-comments>
+      <awareness>ExifTool reads and writes EXIF, IPTC, XMP, and many other mechanisms, and provides an extensive open-source structural parsing of C2PA/JUMBF content. Widely used across creative, archive, and repository workflows.</awareness>
+      <tamper-evidence>ExifTool can structurally parse C2PA manifests but does not perform cryptographic verification. ExifTool can silently overwrite non-C2PA metadata without detection.</tamper-evidence>
+      <binding>ExifTool parses and exposes C2PA hard-binding fields but does not verify the cryptographic binding between manifest and asset content.</binding>
+      <ai-attribution>ExifTool can read and structurally parse C2PA AI attribution assertions, IPTC 2025.1 AI fields, and XMP AI attribution fields. ExifTool does not generate or verify C2PA AI attribution assertions.</ai-attribution>
+      <substantiation>Outputs are structured and metadata reports are reproducible. Widely used as an authoritative metadata extraction source.</substantiation>
+      <interoperability>Artistic/GPL. Widely implemented across creative, archive, and repository tools. Supports a multitude of metadata formats.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="jhove">
+    <name>JHOVE</name>
+    <type>Characterization Tools</type>
+    <version release-date="2025-07-02">1.34.0</version><!-- homepage is slightly behind the repo -->
+    <license>LGPL-2.1</license>
+    <url type="homepage">https://jhove.openpreservation.org</url>
+    <url type="repo">https://github.com/openpreserve/jhove</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>JSTOR/Harvard Object Validation Environment. Format validation and characterization for digital objects. Supports AIFF, ASCII, GIF, HTML, JPEG, JPEG 2000, PDF, TIFF, UTF-8, WAVE, and XML.</description>
+    <tcr4cap-comments>
+      <awareness>JHOVE performs format validation and characterization. JHOVE has no C2PA or provenance-specific awareness beyond format validation.</awareness>
+      <tamper-evidence>JHOVE performs format validation only and does not assess or verify metadata integrity or tamper-evidence.</tamper-evidence>
+      <binding>No binding mechanism. Format validation is based on format structure.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>Outputs are structured and format validation results are reproducible. Widely used in digipres ingest workflows.</substantiation>
+      <interoperability>LGPL-2.1. Widely used in digipres ingest workflows. Outputs XML.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="ffprobe">
+    <name>FFprobe</name>
+    <type>Characterization Tools</type>
+    <version release-date="2026-05-04">8.1.1</version>
+    <license>LGPL-2.1/GPL-2.0</license>
+    <url>https://ffmpeg.org/ffprobe.html</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Multimedia stream analyzer bundled with FFmpeg. Extracts technical metadata from audio/video containers and streams. Outputs JSON, XML, CSV, or plain text.</description>
+    <tcr4cap-comments>
+      <awareness>FFprobe extracts technical metadata from audio, video, image, and text files. FFprobe has no C2PA or provenance-specific awareness.</awareness>
+      <tamper-evidence>FFprobe reports on technical metadata and does not assess or verify metadata integrity or tamper-evidence.</tamper-evidence>
+      <binding>No binding mechanism. Technical metadata reporting is based on containers and encodings.</binding>
+      <ai-attribution>FFprobe can report metadata tags that may include AI attribution fields by convention. No structured AI attribution vocabulary is defined.</ai-attribution>
+      <substantiation>Outputs are structured and technical metadata reports are reproducible. Widely used in broadcast and archive workflows.</substantiation>
+      <interoperability>LGPL-2.1/GPL-2.0. Widely implemented across broadcast, archive, and repository tools. Outputs JSON, XML, plain text.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Fixity Tools -->
+
+  <tool id="md5deep">
+    <name>md5deep / hashdeep</name>
+    <type>Fixity Tools</type>
+    <version release-date="2014-01-29">4.4</version>
+    <license>Public Domain</license>
+    <url>https://github.com/jessek/hashdeep</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Cross-platform checksum computation and audit tool. Supports MD5, SHA-1, SHA-256, Tiger, Whirlpool. hashdeep mode supports recursive directory checksumming and audit against a known-good manifest. Also supports Digital Forensics XML for reporting on checksums and file attributes.</description>
+    <tcr4cap-comments>
+      <awareness>md5deep/hashdeep computes and audits file checksums. No C2PA or provenance-specific awareness beyond fixity checking.</awareness>
+      <tamper-evidence>Checksum computation and audit against a known-good manifest detects modification of any file. No signing mechanism.</tamper-evidence>
+      <binding>Checksum entries bind each digest to a specific file path. No cryptographic binding between the manifest and an external identity or signing authority.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>Outputs are structured and fixity records are reproducible. Widely used in digipres transfer workflows.</substantiation>
+      <interoperability>Public Domain. Widely implemented across digipres, library, and archival transfer tools.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="fixity-pro">
+    <name>Fixity Pro</name>
+    <type>Fixity Tools</type>
+    <version>1.14</version>
+    <license></license><!-- license info not confirmed -->
+    <url type="homepage">https://fixitypro.com</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Standalone fixity checking application. Originally created by AVPS in 2013; transferred to the Open Preservation Foundation (OPF) in September 2025. Monitors file integrity over time with scheduled checks and email reporting. Supports MD5 and SHA-256.</description>
+    <tcr4cap-comments>
+      <awareness>Fixity Pro monitors file integrity over time. No C2PA or provenance-specific awareness beyond fixity checking.</awareness>
+      <tamper-evidence>Scheduled fixity checks detect modification of monitored files over time. No signing mechanism.</tamper-evidence>
+      <binding>Checksum entries bind each digest to a specific file path. No cryptographic binding between the manifest and an external identity or signing authority.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>Outputs are structured fixity reports with scheduled monitoring history. Supports email reporting for institutional workflows.</substantiation>
+      <interoperability>Maintained by OPF. Used in institutional preservation workflows.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="bagit-python">
+    <name>BagIt-Python</name>
+    <type>Fixity Tools</type>
+    <version release-date="2025-06-13">1.9.0</version>
+    <license>CC0-1.0</license>
+    <url>https://github.com/LibraryOfCongress/bagit-python</url>
+    <provenance-scope>package-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Library of Congress BagIt implementation in Python. Creates and validates BagIt packages (RFC 8493) with payload manifests. Supports MD5, SHA-1, SHA-256, SHA-512.</description>
+    <tcr4cap-comments>
+      <awareness>BagIt-Python creates and validates BagIt packages. No C2PA or provenance-specific awareness beyond package fixity.</awareness>
+      <tamper-evidence>Payload and tag manifest checksums detect modification of any file within the bag. No signing mechanism at the BagIt level.</tamper-evidence>
+      <binding>Manifest entries bind each checksum to a specific file path within the bag. Tag manifests cover bag metadata files.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>Creates and validates structured, reproducible BagIt packages. Widely used in digipres transfer workflows.</substantiation>
+      <interoperability>CC0-1.0. Library of Congress reference implementation. Widely used across digipres, library, and archival transfer tools.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Metadata Editors -->
+
+  <tool id="bwfmetaedit">
+    <name>BWF MetaEdit</name>
+    <type>Metadata Editors</type>
+    <version release-date="2026-02-02">26.01</version>
+    <license>Public Domain / CC0</license>
+    <url type="homepage">https://mediaarea.net/BWFMetaEdit</url>
+    <url type="repo">https://github.com/MediaArea/BWFMetaEdit</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Embed, validate, and export metadata in Broadcast WAVE Format files. Supports FADGI, EBU, and BEXT chunk metadata including CodingHistory, originator, origination date/time, and UMID. GUI and CLI.</description>
+    <tcr4cap-comments>
+      <awareness>BWF MetaEdit is the reference tool for BEXT chunk metadata in BWF files. Widely used in broadcast and archival audio workflows.</awareness>
+      <tamper-evidence>BWF MetaEdit embeds and validates BEXT chunk metadata. BWF MetaEdit does not provide cryptographic tamper-evidence for the metadata it writes.</tamper-evidence>
+      <binding>BWF MetaEdit embeds metadata directly in the BWF file structure. There is no cryptographic binding between the metadata chunks and audio content, but BWF MetaEdit can write and verify an MD5 chunk that hashes the audio content.</binding>
+      <ai-attribution>BWF MetaEdit can embed CodingHistory, other BEXT fields, XMP, and other metadata that could document AI processing. No structured AI attribution vocabulary or workflow is defined.</ai-attribution>
+      <substantiation>Outputs are structured metadata in XML and CSV conforming to FADGI guidelines. Widely used as an authoritative metadata embedding tool in archival audio workflows.</substantiation>
+      <interoperability>Public Domain / CC0. Widely implemented across broadcast, archival, and audio tools. GUI and CLI.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="metaedit-avi">
+    <name>AVI MetaEdit</name>
+    <type>Metadata Editors</type>
+    <version release-date="2018-05-09">1.02</version>
+    <license>Public Domain / CC0</license>
+    <url type="homepage">https://mediaarea.net/AVIMetaEdit</url>
+    <url type="repo">https://github.com/MediaArea/AVIMetaEdit</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Embed and validate metadata in AVI files. Companion tool to BWF MetaEdit for video. Supports INFO chunk and BEXT-equivalent metadata in AVI RIFF structure.</description>
+    <tcr4cap-comments>
+      <awareness>AVI MetaEdit embeds and displays metadata in AVI files.</awareness>
+      <tamper-evidence>AVI MetaEdit embeds metadata but does not provide cryptographic tamper-evidence for the metadata it writes.</tamper-evidence>
+      <binding>AVI MetaEdit embeds metadata directly in the AVI file structure. No cryptographic binding between metadata fields and video content.</binding>
+      <ai-attribution>No structured AI attribution vocabulary in AVI metadata. AI documentation requires repurposing of general metadata fields.</ai-attribution>
+      <substantiation>Outputs are structured metadata conforming to AVI RIFF conventions.</substantiation>
+      <interoperability>Public Domain / CC0. Companion to BWF MetaEdit. Limited to AVI format.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Transcoding Tools -->
+
+  <tool id="ffmpeg">
+    <name>FFmpeg</name>
+    <type>Transcoding Tools</type>
+    <version release-date="2026-05-04">8.1.1</version>
+    <license>LGPL-2.1/GPL-2.0</license>
+    <url>https://ffmpeg.org</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none-official</c2pa-support>
+    <description>Open-source multimedia framework for transcoding, muxing, and processing audio and video. As of June 2026 there is no official C2PA support in the mainline codebase; however, a few ffmpeg forks (c2pa_libffmpeg_eqty) add experimental C2PA manifest embedding in MP4. FFmpeg offers substantial control over preserving metadata while transcoding.</description>
+    <tcr4cap-comments>
+      <awareness>FFmpeg is a widely used open-source multimedia framework. No official C2PA support in the mainline codebase as of June 2026.</awareness>
+      <tamper-evidence>FFmpeg strips most metadata by default. No cryptographic tamper-evidence for metadata it writes or preserves.</tamper-evidence>
+      <binding>No cryptographic binding between metadata and media content. Metadata preservation depends on explicit command-line options.</binding>
+      <ai-attribution>No structured AI attribution vocabulary. AI documentation requires explicit metadata injection via command-line options.</ai-attribution>
+      <substantiation>FFmpeg can preserve or inject metadata fields. No formal mechanism for publishing transformation history or CAP policies.</substantiation>
+      <interoperability>LGPL-2.1/GPL-2.0. Widely implemented across broadcast, archive, and repository tools. Supports virtually all audio/video formats.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="handbrake">
+    <name>HandBrake</name>
+    <type>Transcoding Tools</type>
+    <version release-date="2026-06-07">1.11.2</version>
+    <license>GPL-2.0</license>
+    <url type="homepage">https://handbrake.fr</url>
+    <url type="repo">https://github.com/HandBrake/HandBrake</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Open-source video transcoder with GUI and CLI. Removes most metadata by default during transcoding.</description>
+    <tcr4cap-comments>
+      <awareness>HandBrake is a video transcoder. HandBrake has no C2PA or provenance-specific awareness.</awareness>
+      <tamper-evidence>HandBrake removes most metadata by default when transcoding. No cryptographic tamper-evidence features.</tamper-evidence>
+      <binding>No cryptographic binding between metadata and media content.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>No formal mechanism for publishing transformation history or CAP policies.</substantiation>
+      <interoperability>GPL-2.0. Widely used for video transcoding. GUI and CLI.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- C2PA Tools -->
+
+  <tool id="c2patool">
+    <name>c2patool</name>
+    <type>C2PA Tools</type>
+    <version release-date="2026-06-03">0.26.62</version>
+    <license>MIT/Apache-2.0</license>
+    <url type="homepage">https://opensource.contentauthenticity.org/docs/c2patool/c2patool-index/</url>
+    <url type="repo">https://github.com/contentauth/c2pa-rs</url><!-- source moved into c2pa-rs repo in December 2024 -->
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>full</c2pa-support>
+    <description>The official CLI tool from the Content Authenticity Initiative for reading and writing C2PA manifests. Supports JPEG, PNG, MP4, WAV, and many other formats. Reads and displays manifest content, creates and signs new manifests, verifies manifest signatures and hard binding. Built on the c2pa-rs Rust SDK. Source for c2patool was moved into the contentauth/c2pa-rs repository in December 2024.</description>
+    <tcr4cap-comments>
+      <awareness>c2patool is the official CAI CLI tool in alignment with the development of the C2PA specification. Widely used as the reference implementation for C2PA manifest creation and verification.</awareness>
+      <tamper-evidence>c2patool verifies C2PA manifest signatures and hard binding and detects any modification to manifest or asset content.</tamper-evidence>
+      <binding>Creates and verifies C2PA hard binding (content hash) between manifest and asset content.</binding>
+      <ai-attribution>Provides full support for C2PA AI attribution assertions.</ai-attribution>
+      <substantiation>c2patool creates and verifies complete C2PA manifest stores with full transformation history. Supports external trust anchors and timestamps.</substantiation>
+      <interoperability>MIT/Apache-2.0. Official CAI reference implementation. Supports all C2PA-defined embedding paths.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="c2pa-rs">
+    <name>c2pa-rs</name>
+    <type>C2PA Tools</type>
+    <version release-date="2026-06-03">0.26.62</version>
+    <license>MIT/Apache-2.0</license>
+    <url>https://github.com/contentauth/c2pa-rs</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>full</c2pa-support>
+    <description>Official Rust SDK for the C2PA specification from the Content Authenticity Initiative. Core library underlying c2patool, c2pa-python, and many other implementations. Provides full C2PA manifest creation, signing, embedding, and verification.</description>
+    <tcr4cap-comments>
+      <awareness>c2pa-rs is the official CAI Rust SDK with full C2PA specification support. c2pa-rs is the core implementation underlying the C2PA ecosystem.</awareness>
+      <tamper-evidence>c2pa-rs provides full C2PA manifest signature verification and hard binding verification.</tamper-evidence>
+      <binding>Creates and verifies C2PA hard binding (content hash) between manifest and asset content.</binding>
+      <ai-attribution>Provides full support for C2PA AI attribution assertions.</ai-attribution>
+      <substantiation>c2pa-rs creates and verifies complete C2PA manifest stores with full transformation history. Supports external trust anchors and timestamps.</substantiation>
+      <interoperability>MIT/Apache-2.0. Official CAI reference library. Widely used as the foundation for C2PA implementations across languages and platforms.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="c2pa-python">
+    <name>c2pa-python</name>
+    <type>C2PA Tools</type>
+    <version release-date="2026-06-03">0.32.12</version>
+    <license>MIT/Apache-2.0</license>
+    <url>https://github.com/contentauth/c2pa-python</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>full</c2pa-support>
+    <description>The official Python binding for the c2pa-rs library from the Content Authenticity Initiative. Enables C2PA manifest creation, signing, embedding, and verification in Python workflows. Supports all formats and assertions supported by c2pa-rs.</description>
+    <tcr4cap-comments>
+      <awareness>The official CAI Python bindings with full C2PA specification support via c2pa-rs. Enables C2PA integration in Python-based preservation and DAM workflows.</awareness>
+      <tamper-evidence>Provides full C2PA manifest signature verification and hard binding verification via c2pa-rs.</tamper-evidence>
+      <binding>Creates and verifies C2PA hard binding (content hash) between manifest and asset content via c2pa-rs.</binding>
+      <ai-attribution>Provides full support for C2PA AI attribution assertions via c2pa-rs.</ai-attribution>
+      <substantiation>Creates and verifies complete C2PA manifest stores with full transformation history via c2pa-rs. Supports external trust anchors and timestamps.</substantiation>
+      <interoperability>MIT/Apache-2.0. Official CAI Python bindings. Enables C2PA integration in Python-based workflows.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <tool id="verify-contentcredentials">
+    <name>Content Credentials Verify</name>
+    <type>C2PA Tools</type>
+    <version release-date="unknown">online</version>
+    <license>Proprietary</license>
+    <url>https://contentcredentials.org/verify</url>
+    <provenance-scope>file-level</provenance-scope>
+    <c2pa-support>full</c2pa-support>
+    <description>Online C2PA manifest verification tool from the Content Authenticity Initiative. Upload a file to inspect its Content Credentials. Displays manifest assertions, signing certificate, timestamp, and hard binding status.</description>
+    <tcr4cap-comments>
+      <awareness>The official CAI online verification tool. Widely used for public verification of Content Credentials.</awareness>
+      <tamper-evidence>Content Credentials Verify verifies C2PA manifest signatures and reports hard binding status and detects any modification to manifest or asset content.</tamper-evidence>
+      <binding>Verifies C2PA hard binding status. The online tool requires file upload.</binding>
+      <ai-attribution>Displays C2PA AI attribution assertions when present.</ai-attribution>
+      <substantiation>Displays complete manifest content including assertions, signing certificate, timestamp, and provenance chain.</substantiation>
+      <interoperability>Proprietary, online tool. Requires file upload.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Digital Preservation Systems -->
+
+  <tool id="archivematica">
+    <name>Archivematica</name>
+    <type>Digital Preservation Systems</type>
+    <version release-date="2025-09-26">1.18.0</version>
+    <license>AGPL-3.0</license>
+    <url type="homepage">https://www.archivematica.org</url>
+    <url type="repo">https://github.com/artefactual/archivematica</url>
+    <provenance-scope>package-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>Open-source digital preservation system implementing the OAIS reference model. Generates PREMIS events, METS/PREMIS packages, and BagIt transfers. Integrates Siegfried, JHOVE, MediaInfo, and ExifTool for format identification and characterization. No native C2PA support as of June 2026.</description>
+    <tcr4cap-comments>
+      <awareness>Archivematica implements OAIS and generates PREMIS events and METS packages. Widely used in institutional preservation workflows. No native C2PA support.</awareness>
+      <tamper-evidence>Archivematica generates BagIt packages with payload manifests and PREMIS fixity events. Tamper-evidence depends on the BagIt and PREMIS layers.</tamper-evidence>
+      <binding>PREMIS fixity values and BagIt manifests bind checksums to specific file states. No cryptographic binding between metadata and asset content at the C2PA level.</binding>
+      <ai-attribution>No native AI attribution support. PREMIS eventDetail and eventAgent fields could document AI processing actions by convention.</ai-attribution>
+      <substantiation>Archivematica generates structured PREMIS event records and METS packages documenting the full preservation workflow. Widely supported by repository systems.</substantiation>
+      <interoperability>AGPL-3.0. Widely implemented in institutional preservation workflows. Integrates with DSpace, Fedora, and other repository systems.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Watermarking Tools -->
+
+  <tool id="synthid">
+    <name>SynthID</name>
+    <type>Watermarking Tools</type>
+    <version release-date="unknown">unknown</version>
+    <license>Proprietary</license>
+    <url>https://deepmind.google/models/synthid/</url>
+    <provenance-scope>content-level</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>SynthID is Google DeepMind's imperceptible watermarking tool for AI-generated images, audio, text, and video. Embeds watermarks directly into content pixels/samples at generation time. Detection requires access to the SynthID detection API. No C2PA support. Operates independently of the C2PA manifest store.</description>
+    <tcr4cap-comments>
+      <awareness>SynthID is a published, deployed watermarking system from Google DeepMind. Widely discussed in AI provenance contexts.</awareness>
+      <tamper-evidence>Imperceptible watermarks are embedded in content pixels/samples and are resistant to common image processing operations. Detection requires access to the SynthID API.</tamper-evidence>
+      <binding>The watermark is embedded directly in the content signal. Binding is content-level and survives format conversion and metadata stripping.</binding>
+      <ai-attribution>SynthID is purpose-built for AI-generated content attribution and embeds AI generation provenance directly in the content signal.</ai-attribution>
+      <substantiation>Watermark detection confirms AI generation provenance but does not provide a structured, auditable transformation history or external trust anchor.</substantiation>
+      <interoperability>Proprietary. Detection requires access to the SynthID API. No interoperability with C2PA or other open provenance standards.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+  <!-- Metadata Standards and Registries -->
+
+  <tool id="pronom">
+    <name>PRONOM</name>
+    <type>Metadata Standards and Registries</type>
+    <version release-date="2026-01-19">v122</version>
+    <license>Open Government Licence v3.0</license>
+    <url>https://www.nationalarchives.gov.uk/PRONOM/</url>
+    <provenance-scope>n/a</provenance-scope>
+    <c2pa-support>none</c2pa-support>
+    <description>National Archives UK file format registry. Provides PUID (PRONOM Unique Identifier) identifiers used by Siegfried, FIDO, DROID, and Archivematica for format identification. Maintained by The National Archives with community contributions.</description>
+    <tcr4cap-comments>
+      <awareness>PRONOM is the authoritative file format registry for digital preservation. Widely used as the identification authority in institutional workflows.</awareness>
+      <tamper-evidence>Tamper-evidence is out of scope.</tamper-evidence>
+      <binding>Binding is out of scope.</binding>
+      <ai-attribution>AI attribution is out of scope.</ai-attribution>
+      <substantiation>PRONOM provides authoritative, citable format identifiers (PUIDs) used across digipres tools and policies.</substantiation>
+      <interoperability>Open Government Licence. Widely implemented across digipres tools and systems. PUIDs are a de facto standard for format identification.</interoperability>
+    </tcr4cap-comments>
+  </tool>
+
+</registry>
