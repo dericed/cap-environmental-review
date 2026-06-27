@@ -63,6 +63,8 @@
   <format id="jpeg">
     <name>JPEG</name>
     <type>image</type>
+    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml</url>
+    <url type="homepage">https://jpeg.org/</url>
     <structure>binary-segment</structure>
     <readability type="open">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="cryptographically-signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
