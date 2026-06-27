@@ -64,13 +64,14 @@
     <name>JPEG</name>
     <type>image</type>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml</url>
+    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000655.shtml</url>
     <url type="homepage">https://jpeg.org/</url>
     <structure>binary-segment</structure>
     <readability type="open">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="cryptographically-signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
     <persistence type="medium">Lossy compression limits use as an archival master format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
     <c2pa-support>
-      <mode type="embedded-app11">C2PA manifest store embedded in APP11 (0xFFEB) chunk. Multiple sequential APP11 segments used for large manifests. Hard binding to image content via content hash.</mode>
+      <mode type="embedded-app11">C2PA manifest store embedded in APP11 (0xFFEB) chunk. Multiple sequential APP11 segments used for large manifests. Hard binding to image content via content hash. The C2PA Technical Specifications cite JPEG XT, ISO/IEC 18477-3 (which defines the JPEG file format) as the basis of the definition of the APP11 structure that stores the C2PA manifest store.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
     </c2pa-support>
     <description>JPEG (ISO/IEC 10918) is the dominant photographic image format. C2PA stored in APP11 (0xFFEB) chunk; multiple sequential APP11 segments used for large manifests. Also supports EXIF (APP1), IPTC (APP13), and XMP (APP1) metadata. JPEG Trust (ISO/IEC 21617) provides an additional trust framework. Widely adopted by camera manufacturers (Leica M11-P, Nikon Z6 III) for C2PA signing at capture.</description>
