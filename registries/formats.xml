@@ -133,7 +133,7 @@
     <c2pa-support>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the TIFF asset; uses C2PA soft binding. No native TIFF embedding path is defined in the C2PA Technical Specification as of 2026-05.</mode>
     </c2pa-support>
-    <description>TIFF (Adobe TIFF 6.0) is a widely used archival image format with a tag-based IFD structure. Supports EXIF (SubIFD), IPTC (tag 33723), and XMP (tag 700) metadata. No native C2PA embedding path; sidecar .c2pa delivery is the defined path. Common digitization master format in library and archival workflows.</description>
+    <description>TIFF is a widely used archival image format with a tag-based IFD structure. Supports EXIF (SubIFD), IPTC (tag 33723), and XMP (tag 700) metadata. No native C2PA embedding path; sidecar .c2pa delivery is the defined path. Common digitization master format in library and archival workflows.</description>
     <mechanisms>
       <mechanism-ref id="exif-embedded"/>
       <mechanism-ref id="xmp-embedded"/>
