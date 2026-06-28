@@ -74,7 +74,7 @@
       <mode type="embedded-app11">C2PA manifest store embedded in APP11 (0xFFEB) chunk. Multiple sequential APP11 segments used for large manifests. Hard binding to image content via content hash. The C2PA Technical Specifications cite JPEG XT, ISO/IEC 18477-3 (which defines the JPEG file format) as the basis of the definition of the APP11 structure that stores the C2PA manifest store.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
     </c2pa-support>
-    <description>JPEG (ISO/IEC 10918) is the dominant photographic image format. C2PA stored in APP11 (0xFFEB) chunk; multiple sequential APP11 segments used for large manifests. Also supports EXIF (APP1), IPTC (APP13), and XMP (APP1) metadata. JPEG Trust (ISO/IEC 21617) provides an additional trust framework. Widely adopted by camera manufacturers (Leica M11-P, Nikon Z6 III) for C2PA signing at capture.</description>
+    <description>JPEG (ISO/IEC 10918) is a dominant photographic image format. C2PA stored in APP11 (0xFFEB) chunk; multiple sequential APP11 segments used for large manifests. Also supports EXIF (APP1), IPTC (APP13), and XMP (APP1) metadata. JPEG Trust (ISO/IEC 21617) provides an additional trust framework. Widely adopted by camera manufacturers (Leica M11-P, Nikon Z6 III) for C2PA signing at capture.</description>
     <mechanisms>
       <mechanism-ref id="exif-embedded"/>
       <mechanism-ref id="xmp-embedded"/>
@@ -84,7 +84,7 @@
       <mechanism-ref id="sidecar-c2pa"/>
     </mechanisms>
     <tcr4cap-comments>
-      <awareness>JPEG is the most widely deployed image format. C2PA embedding in APP11 is a defined, published standard with broad industry adoption.</awareness>
+      <awareness>JPEG is a widely deployed image format and has relatively exception support with metadata processing tools. C2PA embedding in APP11 is a defined, published standard with broad industry adoption.</awareness>
       <tamper-evidence>C2PA APP11 chunk provides cryptographic tamper-evidence via signed manifests and hard binding to image content.</tamper-evidence>
       <binding>C2PA hard binding via content hash provides cryptographic linkage between manifest and image content.</binding>
       <ai-attribution>C2PA AI attribution assertions (c2pa.ai.generatedWith, c2pa.training-mining) and IPTC 2025.1 AI fields are both supported in JPEG.</ai-attribution>
