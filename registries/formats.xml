@@ -13,7 +13,7 @@
       <mode type="embedded-riff-chunk">C2PA manifest store may be embedded in a custom C2PA RIFF chunk within the BWF file; hard binding to audio content via C2PA cryptographic signing chain.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the BWF asset; uses C2PA soft binding. Relationship must be maintained by the packaging or delivery layer.</mode>
     </c2pa-support>
-    <description>EBU/FADGI standard audio format based on RIFF/WAVE. BEXT chunk carries CodingHistory, originator, origination date/time, and UMID. C2PA stored in a custom C2PA RIFF chunk. Widely used as the archival master format for audio in broadcast, library, and archival workflows. Supported by BWF MetaEdit for metadata embedding and validation.</description>
+    <description>EBU/FADGI standard audio format based on RIFF/WAVE. BEXT chunk carries CodingHistory, originator, origination date/time, and UMID. C2PA stored in a custom C2PA RIFF chunk. Widely used as the archival master or primary format for audio in broadcast, library, and archival workflows. Supported by BWF MetaEdit for metadata embedding and validation.</description>
     <mechanisms>
       <mechanism-ref id="bext-chunk"/>
       <mechanism-ref id="xmp-embedded"/>
@@ -69,7 +69,7 @@
     <structure>binary-segment</structure>
     <readability type="open">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="cryptographically-signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
-    <persistence type="medium">Lossy compression limits use as an archival master format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
+    <persistence type="medium">Lossy compression limits use as an archival master or primary format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
     <c2pa-support>
       <mode type="embedded-app11">C2PA manifest store embedded in APP11 (0xFFEB) chunk. Multiple sequential APP11 segments used for large manifests. Hard binding to image content via content hash. The C2PA Technical Specifications cite JPEG XT, ISO/IEC 18477-3 (which defines the JPEG file format) as the basis of the definition of the APP11 structure that stores the C2PA manifest store.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
@@ -133,7 +133,7 @@
     <c2pa-support>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the TIFF asset; uses C2PA soft binding. No native TIFF embedding path is defined in the C2PA Technical Specification as of 2026-05.</mode>
     </c2pa-support>
-    <description>TIFF is a widely used archival image format with a tag-based IFD structure. Supports EXIF (SubIFD), IPTC (tag 33723), and XMP (tag 700) metadata. No native C2PA embedding path; sidecar .c2pa delivery is the defined path. Common digitization master format in library and archival workflows.</description>
+    <description>TIFF is a widely used archival image format with a tag-based IFD structure. Supports EXIF (SubIFD), IPTC (tag 33723), and XMP (tag 700) metadata. No native C2PA embedding path; sidecar .c2pa delivery is the defined path. Common digitization master or primary format in library and archival workflows.</description>
     <mechanisms>
       <mechanism-ref id="exif-embedded"/>
       <mechanism-ref id="xmp-embedded"/>
