@@ -28,7 +28,7 @@ This is a structured set of observations against the six TCR4CAP assessment crit
 |------------------|------------------------------------------------------------------------|
 | Awareness        | Whether the tool/format/mechanism has any CAP awareness                |
 | Tamper Evidence  | Whether modification of content or metadata can be detected            |
-| Binding          | Whether metadata is cryptographically linked to the media content      |
+| Binding          | Whether metadata is linked to the media content                        |
 | AI Attribution   | Whether AI generation or training provenance can be recorded           |
 | Substantiation   | Whether provenance claims can be verified against external anchors     |
 | Interoperability | License, standards basis, and breadth of implementation                |
@@ -123,7 +123,7 @@ The highest level of integrity or authenticity verification the format supports.
 
 | Value                      | Meaning                                                        |
 |----------------------------|----------------------------------------------------------------|
-| `cryptographically-signed` | Cryptographic signing with hard binding to content             |
+| `signed`                   | A signature with hard binding to content                       |
 | `tamper-evident`           | Checksum-based detection of modification (no signing)          |
 | `integrity-only`           | Fixity values present but no signing or provenance chain       |
 | `none`                     | No integrity or authenticity mechanism                         |
@@ -186,7 +186,7 @@ The extent to which the mechanism provides any integrity check over the primary 
 
 | Value           | Meaning                                                               |
 |-----------------|-----------------------------------------------------------------------|
-| `signed`        | Cryptographic signature covers the media data (C2PA hard binding)     |
+| `signed`        | Includes a signature covering the media data (C2PA hard binding)      |
 | `checksum`      | A hash or CRC covers the media data                                   |
 | `external-only` | Integrity is recorded externally (e.g. PREMIS fixity, BagIt manifest) |
 | `none`          | No media-data integrity mechanism                                     |
@@ -196,7 +196,7 @@ The extent to which the mechanism provides any integrity check over the metadata
 
 | Value       | Meaning                                                                 |
 |-------------|-------------------------------------------------------------------------|
-| `signed`    | Cryptographic signature covers the metadata (C2PA manifest signing)     |
+| `signed`    | Includes a signature covers the metadata (C2PA manifest signing)        |
 | `checksum`  | A hash or CRC covers the metadata chunk                                 |
 | `none`      | No metadata integrity mechanism; fields can be silently overwritten     |
 
@@ -205,7 +205,7 @@ The extent to which the mechanism supports a verifiable provenance chain linking
 
 | Value           | Meaning                                                               |
 |-----------------|-----------------------------------------------------------------------|
-| `signed`        | Cryptographically signed provenance chain (C2PA manifest store)       |
+| `signed`        | Includes a signed provenance chain (such as a C2PA manifest store)    |
 | `external-only` | Provenance chain exists but is held externally (PREMIS events, BagIt) |
 | `none`          | No provenance chain mechanism                                         |
 

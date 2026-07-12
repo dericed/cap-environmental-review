@@ -68,7 +68,7 @@
     <url type="homepage">https://jpeg.org/</url>
     <structure>binary-segment</structure>
     <readability type="open">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
-    <verifiability type="cryptographically-signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
+    <verifiability type="signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
     <persistence type="medium">Lossy compression limits use as an archival master or primary format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
     <c2pa-support>
       <mode type="embedded-app11">C2PA manifest store embedded in APP11 (0xFFEB) chunk. Multiple sequential APP11 segments used for large manifests. Hard binding to image content via content hash. The C2PA Technical Specifications cite JPEG XT, ISO/IEC 18477-3 (which defines the JPEG file format) as the basis of the definition of the APP11 structure that stores the C2PA manifest store. If a manifest is embedded in the center of a JPEG-1 file in an APP11 segment, the claim creator may exclude the APP11 segment(s) from the hash calculation, as defined in C2PA specification 2.4.</mode>
@@ -98,7 +98,7 @@
     <type>image</type>
     <structure>binary-chunk</structure>
     <readability type="open">ISO/IEC 15948 and W3C PNG specification; open standard with no licensing restrictions.</readability>
-    <verifiability type="cryptographically-signed">C2PA stored in custom caBX chunk provides cryptographic signing and hard binding to image content. XMP and EXIF metadata in iTXt/eXIf chunks are informative and not integrity-protected. PNG CRC checksums provide per-chunk structural integrity only.</verifiability>
+    <verifiability type="signed">C2PA stored in custom caBX chunk provides cryptographic signing and hard binding to image content. XMP and EXIF metadata in iTXt/eXIf chunks are informative and not integrity-protected. PNG CRC checksums provide per-chunk structural integrity only.</verifiability>
     <persistence type="high">Lossless compression; widely used as an archival and distribution format for images requiring transparency or lossless fidelity.</persistence>
     <c2pa-support>
       <mode type="embedded-cabx-chunk">C2PA manifest store embedded in custom caBX chunk. Hard binding to image content via content hash.</mode>
@@ -128,7 +128,7 @@
     <type>image</type>
     <structure>binary</structure>
     <readability type="open">Open standard with no licensing restrictions on implementation or use.</readability>
-    <verifiability type="cryptographically-signed">C2PA manifests can be natively embedded in TIFF via a JUMBF box stored in the IFD structure, as defined in C2PA specification 2.4, providing cryptographic signing and hard binding to the content. A sidecar .c2pa file is also supported as an alternative delivery path. Native TIFF metadata (EXIF, IPTC, XMP) is informative and not integrity-protected outside of C2PA.</verifiability>
+    <verifiability type="signed">C2PA manifests can be natively embedded in TIFF via a JUMBF box stored in the IFD structure, as defined in C2PA specification 2.4, providing cryptographic signing and hard binding to the content. A sidecar .c2pa file is also supported as an alternative delivery path. Native TIFF metadata (EXIF, IPTC, XMP) is informative and not integrity-protected outside of C2PA.</verifiability>
     <persistence type="high">Widely used archival image format; long-term institutional support from libraries, archives, and digitization programs. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
     <c2pa-support>
         <mode type="embedded-jumbf-ifd">C2PA manifest store embedded via a JUMBF box stored in the TIFF IFD structure, as defined in C2PA specification 2.4. Hard binding to image content via C2PA cryptographic signing chain. Use of a general box binding is strongly recommended per C2PA guidance.</mode>
@@ -160,7 +160,7 @@
     <type>video</type>
     <structure>binary-atom</structure>
     <readability type="open">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
-    <verifiability type="cryptographically-signed">C2PA stored in uuid atom provides cryptographic signing and hard binding to video content. XMP and other metadata atoms are informative and not integrity-protected.</verifiability>
+    <verifiability type="signed">C2PA stored in uuid atom provides cryptographic signing and hard binding to video content. XMP and other metadata atoms are informative and not integrity-protected.</verifiability>
     <persistence type="high">Widely used video container format; long-term institutional support from ISO, MPEG, and industry. Widely used for archival and distribution of video content.</persistence>
     <c2pa-support>
       <mode type="embedded-uuid-atom">C2PA manifest store embedded in uuid atom (UUID: d8fec3d6-1b0e-483c-9297-5844b8f49b68). Hard binding to video content via content hash. Covers MP4, MOV, MJ2, 3GP, and other ISO-BMFF derivatives.</mode>
@@ -216,7 +216,7 @@
     <type>metadata</type>
     <structure>cbor-jumbf</structure>
     <readability type="open-spec">C2PA Technical Specification published by the Coalition for Content Provenance and Authenticity; open specification with reference implementation (c2pa-rs) under open-source license.</readability>
-    <verifiability type="cryptographically-signed">Each manifest is cryptographically signed using CMS/COSE. Hard binding links the manifest to the asset content via content hash. The manifest store is append-only; prior manifests are preserved as ingredient references. Any modification to a manifest or to the asset content invalidates the signature or binding.</verifiability>
+    <verifiability type="signed">Each manifest is cryptographically signed using CMS/COSE. Hard binding links the manifest to the asset content via content hash. The manifest store is append-only; prior manifests are preserved as ingredient references. Any modification to a manifest or to the asset content invalidates the signature or binding.</verifiability>
     <persistence type="high">Append-only manifest store preserves the full provenance chain across the asset lifecycle. Signed manifests are immutable. External trust anchors (TSA, credential issuers) provide long-term verifiability.</persistence>
     <c2pa-support>
       <mode type="embedded">Embedded in host files via format-specific JUMBF containers (APP11 in JPEG, caBX in PNG, uuid atom in MP4/ISOBMFF, C2PA RIFF chunk in WAV/BWF).</mode>
