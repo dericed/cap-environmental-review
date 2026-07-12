@@ -127,26 +127,28 @@
     <name>TIFF (Tagged Image File Format)</name>
     <type>image</type>
     <structure>binary</structure>
-    <readability type="open">Adobe TIFF 6.0 specification; open standard with no licensing restrictions on implementation or use.</readability>
-    <verifiability type="integrity-only">No native cryptographic signing. EXIF, IPTC, and XMP metadata are informative and not integrity-protected. C2PA is not natively embedded in TIFF; a sidecar .c2pa file is the defined delivery path.</verifiability>
-    <persistence type="high">Widely used archival image format; long-term institutional support from libraries, archives, and digitization programs.</persistence>
+    <readability type="open">Open standard with no licensing restrictions on implementation or use.</readability>
+    <verifiability type="cryptographically-signed">C2PA manifests can be natively embedded in TIFF via a JUMBF box stored in the IFD structure, as defined in C2PA specification 2.4, providing cryptographic signing and hard binding to the content. A sidecar .c2pa file is also supported as an alternative delivery path. Native TIFF metadata (EXIF, IPTC, XMP) is informative and not integrity-protected outside of C2PA.</verifiability>
+    <persistence type="high">Widely used archival image format; long-term institutional support from libraries, archives, and digitization programs. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
     <c2pa-support>
-      <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the TIFF asset; uses C2PA soft binding. No native TIFF embedding path is defined in the C2PA Technical Specification as of 2026-05.</mode>
-    </c2pa-support>
-    <description>TIFF is a widely used archival image format with a tag-based IFD structure. Supports EXIF (SubIFD), IPTC (tag 33723), and XMP (tag 700) metadata. No native C2PA embedding path; sidecar .c2pa delivery is the defined path. Common digitization master or primary format in library and archival workflows.</description>
+        <mode type="embedded-jumbf-ifd">C2PA manifest store embedded via a JUMBF box stored in the TIFF IFD structure, as defined in C2PA specification 2.4. Hard binding to image content via C2PA cryptographic signing chain. Use of a general box binding is strongly recommended per C2PA guidance.</mode>
+        <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the TIFF asset; uses C2PA soft binding. Relationship must be maintained by the packaging or delivery layer.</mode>
+      </c2pa-support>
+    <description>TIFF is a widely used archival image format with a tag-based IFD structure. Supports EXIF (SubIFD), IPTC (tag 33723), and XMP (tag 700) metadata. C2PA manifests can be natively embedded via a JUMBF box in the IFD structure per C2PA specification 2.4; a sidecar .c2pa file is also supported. Common digitization master or primary format in library and archival workflows.</description>
     <mechanisms>
       <mechanism-ref id="exif-embedded"/>
       <mechanism-ref id="xmp-embedded"/>
       <mechanism-ref id="iptc-photo"/>
+      <mechanism-ref id="jumbf-c2pa"/>
       <mechanism-ref id="sidecar-c2pa"/>
       <mechanism-ref id="sidecar-premis"/>
     </mechanisms>
     <tcr4cap-comments>
-      <awareness>TIFF is a well-established archival format. EXIF, IPTC, and XMP provenance fields are widely understood. No native C2PA embedding path limits C2PA awareness in TIFF workflows.</awareness>
-      <tamper-evidence>EXIF, IPTC, and XMP metadata are informative and not integrity-protected. C2PA sidecar provides cryptographic tamper-evidence but the sidecar can be separated from the asset.</tamper-evidence>
-      <binding>No native C2PA embedding path. Sidecar binding is soft and depends on file management conventions.</binding>
-      <ai-attribution>IPTC 2025.1 AI fields are supported via XMP. No C2PA hard binding for AI attribution without a sidecar.</ai-attribution>
-      <substantiation>EXIF, IPTC, and XMP provide a readable provenance record. PREMIS sidecar provides institutional transformation history.</substantiation>
+      <awareness>TIFF is a well-established archival format. EXIF, IPTC, and XMP provenance fields are widely understood. C2PA embedding via JUMBF box in the IFD structure is defined in C2PA specification 2.4 but not yet widely implemented in TIFF-specific tooling.</awareness>
+      <tamper-evidence>EXIF, IPTC, and XMP metadata are informative and not integrity-protected. C2PA JUMBF embedding provides cryptographic tamper-evidence via signed manifests and hard binding to image content when present.</tamper-evidence>
+      <binding>C2PA hard binding via content hash provides cryptographic linkage between manifest and image content when embedded. Sidecar binding is soft and depends on file management conventions.</binding>
+      <ai-attribution>C2PA AI attribution assertions (c2pa.ai.generatedWith, c2pa.training-mining) and IPTC 2025.1 AI fields (via XMP) are both supported in TIFF.</ai-attribution>
+      <substantiation>EXIF, IPTC, and XMP provide a readable provenance record. C2PA manifest store preserves full transformation history when present. PREMIS sidecar provides institutional transformation history.</substantiation>
       <interoperability>Open standard. Universally implemented across image editing tools, scanners, and repository systems.</interoperability>
     </tcr4cap-comments>
   </format>
