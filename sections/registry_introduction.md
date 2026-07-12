@@ -111,7 +111,7 @@ The internal structural model of the format.
 | `text-manifest`  | Plain-text manifest files (BagIt)                          |
 
 ### Readability (`type` attribute)
-Whether the format specification is openly available.
+The extent to which the format specification is openly available.
 
 | Value         | Meaning                                                               |
 |---------------|-----------------------------------------------------------------------|
@@ -163,7 +163,7 @@ The broad category of the mechanism.
 | `package-integrity` | Checksum manifests at the package level (BagIt)                     |
 
 ### Editability — File-level (`type` attribute)
-Whether the container that holds this mechanism can be written to.
+The extent to which the container that holds this mechanism can be written to.
 
 | Value                | Meaning                                                                    |
 |----------------------|----------------------------------------------------------------------------|
@@ -182,7 +182,7 @@ How the metadata content itself behaves when updated.
 | `fixed`        | The value is computed at creation and cannot be changed without recomputing |
 
 ### Verifiability — Media Integrity (`type` attribute)
-Whether the mechanism provides any integrity check over the primary media data (audio samples, image pixels, video frames).
+The extent to which the mechanism provides any integrity check over the primary media data (audio samples, image pixels, video frames).
 
 | Value           | Meaning                                                               |
 |-----------------|-----------------------------------------------------------------------|
@@ -192,7 +192,7 @@ Whether the mechanism provides any integrity check over the primary media data (
 | `none`          | No media-data integrity mechanism                                     |
 
 ### Verifiability — Metadata Integrity (`type` attribute)
-Whether the mechanism provides any integrity check over the metadata itself.
+The extent to which the mechanism provides any integrity check over the metadata itself.
 
 | Value       | Meaning                                                                 |
 |-------------|-------------------------------------------------------------------------|
@@ -201,7 +201,7 @@ Whether the mechanism provides any integrity check over the metadata itself.
 | `none`      | No metadata integrity mechanism; fields can be silently overwritten     |
 
 ### Verifiability — Chain of Custody (`type` attribute)
-Whether the mechanism supports a verifiable provenance chain linking the asset to an external identity or signing authority.
+The extent to which the mechanism supports a verifiable provenance chain linking the asset to an external identity or signing authority.
 
 | Value           | Meaning                                                               |
 |-----------------|-----------------------------------------------------------------------|
