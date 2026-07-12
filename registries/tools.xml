@@ -408,3 +408,23 @@
     <interoperability>Open source (Unlicense).Cross-platform. Relies on FFmpeg for post-processing, inheriting FFmpeg's format support limitations regarding C2PA preservation.</interoperability>
   </tcr4cap-comments>
 </tool>
+
+<tool id="rsync">
+  <name>rsync</name>
+  <category>Capture and Transmission Tools</category>
+  <version>3.4.4</version>
+  <license>GPL-3.0</license>
+  <url type="homepage">https://rsync.samba.org/</url>
+  <url type="repo">https://github.com/RsyncProject/rsync</url>
+  <provenance-scope>file-level</provenance-scope>
+  <c2pa-support>none</c2pa-support>
+  <description>rsync is an open source file synchronization and transfer tool that copies files between systems using a delta-transfer algorithm. rsync transfers files byte-for-byte, so existing, embedded CAP metadata within file structures is preserved. However, rsync has no CAP awareness and does not verify or validate metadata after transfer. Extended attributes are preserved only with the explicit -X/--xattrs flag; the default -a archive mode does not include xattrs.</description>
+  <tcr4cap-comments>
+    <awareness>rsync has no awareness of CAP metadata. It treats files as opaque byte streams. Embedded CAP data survives transfer because rsync preserves file content exactly, but rsync cannot detect, report, or validate the presence of CAP metadata. Institutions must use separate tools to verify CAP data integrity before and after transfer.</awareness>
+    <tamper-evidence>rsync uses checksums internally for both its delta-transfer algorithm and its automatic post-transfer whole-file verification, but does not output or persist these checksums as a fixity record. The --checksum (-c) flag changes rsync's file comparison method from size-and-time to a 128-bit checksum, but this is for internal transfer decisions and is not reported to the user. File-level fixity must be computed separately (e.g. with bagit, md5sum, sha256sum, etc) before and after transfer to create a persistent tamper-evidence record.</tamper-evidence>
+    <binding>No binding mechanism. rsync does not create or verify any binding between metadata and content. Embedded C2PA hard binding is preserved structurally (since the file is transferred byte-for-byte), but rsync cannot report whether the binding is intact. Sidecar relationships (e.g. .c2pa, .xmp, or PREMIS XML files paired with media files) are not tracked or maintained by rsync; both files must be transferred explicitly and their association managed by the institution.</binding>
+    <ai-attribution>No AI attribution support. rsync does not interact with or preserve AI provenance metadata beyond preserving the file bytes that contain it.</ai-attribution>
+    <substantiation>rsync does not natively record or append transfer actions to a structured chain of custody. However, the --log-file option can log transfer actions (source, destination, filenames, timestamps, itemized changes) to a file, and --log-file-format allows customization of the log output. This log can serve as an informal provenance record documenting where files came from and when they were transferred, though it is not structured CAP data. Institutions should integrate rsync logs into formal provenance systems (e.g. PREMIS events) for transfer documentation.</substantiation>
+    <interoperability>Open source (GPL-3.0). Universally available on Linux, macOS, and Unix-like systems. Widely used in digital preservation workflows for file transfer and synchronization. The -aAX flag combination preserves permissions, ownership, timestamps, ACLs, and extended attributes, but awareness of these flags and their CAP implications is the institution's responsibility.</interoperability>
+  </tcr4cap-comments>
+</tool>
