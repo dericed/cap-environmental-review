@@ -89,7 +89,7 @@
       <binding>C2PA hard binding via content hash provides cryptographic linkage between manifest and image content.</binding>
       <ai-attribution>C2PA AI attribution assertions (c2pa.ai.generatedWith, c2pa.training-mining) and IPTC 2025.1 AI fields are both supported in JPEG.</ai-attribution>
       <substantiation>C2PA manifest store preserves full transformation history. External trust anchors supported. Public verification via contentcredentials.org.</substantiation>
-      <interoperability>Open standard. Universally implemented across cameras, phones, image editing tools, and repository systems.</interoperability>
+      <interoperability>Universally implemented across cameras, phones, image editing tools, and repository systems.</interoperability>
     </tcr4cap-comments>
   </format>
 
