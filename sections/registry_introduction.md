@@ -40,17 +40,18 @@ Tools are software applications, libraries, SDKs, online services, or reference 
 ### Category (`type`)
 This is a broad functional category of the tool.
 
-| Value                               | Meaning                                                    |
-|-------------------------------------|------------------------------------------------------------|
-| `Identification Tools`              | File format identification (PRONOM/FDD signatures)         |
-| `Characterization Tools`            | Technical metadata extraction and format validation        |
-| `Fixity Tools`                      | Checksum computation, audit, and package integrity         |
-| `Metadata Editors`                  | Tools that read and write embedded metadata                |
-| `Transcoding Tools`                 | Audio/video format conversion and processing               |
-| `C2PA Tools`                        | Tools with native C2PA manifest support                    |
-| `Digital Preservation Systems`      | End-to-end preservation workflow systems                   |
-| `Watermarking Tools`                | Content-level imperceptible watermarking                   |
-| `Metadata Standards and Registries` | Authoritative format or metadata registries                |
+| Value                               | Meaning                                                                    |
+|-------------------------------------|----------------------------------------------------------------------------|
+| `Identification Tools`              | File format identification (PRONOM/FDD signatures)                         |
+| `Characterization Tools`            | Technical metadata extraction and format validation                        |
+| `Fixity Tools`                      | Checksum computation, audit, and package integrity                         |
+| `Metadata Editors`                  | Tools that read and write embedded metadata                                |
+| `Transcoding Tools`                 | Audio/video format conversion and processing                               |
+| `C2PA Tools`                        | Tools with native C2PA manifest support                                    |
+| `Digital Preservation Systems`      | End-to-end preservation workflow systems                                   |
+| `Watermarking Tools`                | Content-level imperceptible watermarking                                   |
+| `Metadata Standards and Registries` | Authoritative format or metadata registries                                |
+| `Capture and Transmission Tools`    | Tools that capture, download, or transfer media files (e.g. yt-dlp, rsync) |
 
 ### Version
 The current (as of the writing of this document) release version of the tool in ISO 8601 format (`YYYY-MM-DD`).
