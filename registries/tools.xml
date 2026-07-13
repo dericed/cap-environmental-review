@@ -466,7 +466,7 @@
 
   <tool id="yt-dlp">
     <name>yt-dlp</name>
-    <category>Capture and Transmission Tools</category>
+    <type>Capture and Transmission Tools</type>
     <version>2026.07.04</version>
     <license>Unlicense</license>
     <url type="repo">https://github.com/yt-dlp/yt-dlp</url>
