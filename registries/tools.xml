@@ -305,7 +305,7 @@
       <durability>preserves-with-action</durability>
       <depth>full</depth>
     </provenance>
-    <c2pa-support>full</c2pa-support>
+    <c2pa-support>create-sign</c2pa-support>
     <description>The official CLI tool from the Content Authenticity Initiative for reading and writing C2PA manifests. Supports JPEG, PNG, MP4, WAV, and many other formats. Reads and displays manifest content, creates and signs new manifests, verifies manifest signatures and hard binding. Built on the c2pa-rs Rust SDK. Source for c2patool was moved into the contentauth/c2pa-rs repository in December 2024.</description>
     <tcr4cap-comments>
       <awareness>c2patool is the official CAI CLI tool in alignment with the development of the C2PA specification. Widely used as the reference implementation for C2PA manifest creation and verification.</awareness>
@@ -328,7 +328,7 @@
       <durability>preserves-with-action</durability>
       <depth>full</depth>
     </provenance>
-    <c2pa-support>full</c2pa-support>
+    <c2pa-support>create-sign</c2pa-support>
     <description>Official Rust SDK for the C2PA specification from the Content Authenticity Initiative. Core library underlying c2patool, c2pa-python, and many other implementations. Provides full C2PA manifest creation, signing, embedding, and verification.</description>
     <tcr4cap-comments>
       <awareness>c2pa-rs is the official CAI Rust SDK with full C2PA specification support. c2pa-rs is the core implementation underlying the C2PA ecosystem.</awareness>
@@ -351,7 +351,7 @@
       <durability>preserves-with-action</durability>
       <depth>full</depth>
     </provenance>
-    <c2pa-support>full</c2pa-support>
+    <c2pa-support>create-sign</c2pa-support>
     <description>The official Python binding for the c2pa-rs library from the Content Authenticity Initiative. Enables C2PA manifest creation, signing, embedding, and verification in Python workflows. Supports all formats and assertions supported by c2pa-rs.</description>
     <tcr4cap-comments>
       <awareness>The official CAI Python bindings with full C2PA specification support via c2pa-rs. Enables C2PA integration in Python-based preservation and DAM workflows.</awareness>
@@ -374,7 +374,7 @@
       <durability>n/a</durability>
       <depth>full</depth>
     </provenance>
-    <c2pa-support>full</c2pa-support>
+    <c2pa-support>verify</c2pa-support>
     <description>Online C2PA manifest verification tool from the Content Authenticity Initiative. Upload a file to inspect its Content Credentials. Displays manifest assertions, signing certificate, timestamp, and hard binding status.</description>
     <tcr4cap-comments>
       <awareness>The official CAI online verification tool. Widely used for public verification of Content Credentials.</awareness>

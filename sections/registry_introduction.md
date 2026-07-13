@@ -92,16 +92,15 @@ The extent of provenance detail the tool captures or processes.
 | `n/a`            | Not applicable                                                                                   |
 
 ### C2PA Support
-The degree to which the tool supports the C2PA specification.
+The degree to which the tool supports the C2PA specification, expressed as a functional capability level.
 
 | Value            | Meaning                                                              |
 |------------------|----------------------------------------------------------------------|
-| `full`           | Full C2PA manifest creation, signing, embedding, and verification    |
-| `detect-parse`   | Can detect and parse C2PA manifests but cannot sign or verify        |
+| `create-sign`    | Can create, embed, and sign C2PA manifests (signing requires an external certificate from a CA on the C2PA Trust List); can also verify |
+| `verify`         | Can cryptographically verify C2PA manifest signatures and hard binding, and display manifest content; cannot create or sign |
+| `detect-parse`   | Can detect and structurally parse C2PA manifests but cannot verify signatures, create, or sign |
 | `none-official`  | No official C2PA support; experimental forks may exist               |
 | `none`           | No C2PA support                                                      |
-
----
 
 ## 3. Formats Registry
 Formats are file formats or metadata standards relevant to content authenticity and provenance. This includes container formats (BWF, MP4), image formats (JPEG, PNG), and metadata formats (XMP, PREMIS, BagIt).
