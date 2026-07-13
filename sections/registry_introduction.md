@@ -145,9 +145,8 @@ The highest level of integrity or authenticity verification the format supports.
 
 | Value                      | Meaning                                                        |
 |----------------------------|----------------------------------------------------------------|
-| `signed`                   | A signature with hard binding to content                       |
-| `tamper-evident`           | Checksum-based detection of modification (no signing)          |
-| `integrity-only`           | Fixity values present but no signing or provenance chain       |
+| `signed`                   | Cryptographic signature with hard binding to content           |
+| `integrity-only`           | Fixity values or checksums present; but not necessary signing or provenance chain |
 | `none`                     | No integrity or authenticity mechanism                         |
 
 ### C2PA Support Modes

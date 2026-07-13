@@ -322,7 +322,7 @@
     <type>metadata</type>
     <structure>text-manifest</structure>
     <readability type="open">IETF RFC 8493; open standard with no licensing restrictions on implementation or use.</readability>
-    <verifiability type="tamper-evident">Manifest files (manifest-*.txt) record checksums for all payload files; tag manifests (tagmanifest-*.txt) record checksums for all tag files. Any modification to a payload or tag file produces a checksum mismatch detectable by bag validation. No signing mechanism; the manifest files themselves could be replaced along with modified payload files without detection at the BagIt level.</verifiability>
+    <verifiability type="integrity-only">Manifest files (manifest-*.txt) record checksums for all payload files; tag manifests (tagmanifest-*.txt) record checksums for all tag files. Any modification to a payload or tag file produces a checksum mismatch detectable by bag validation. No signing mechanism; the manifest files themselves could be replaced along with modified payload files without detection at the BagIt level.</verifiability>
     <persistence type="high">BagIt is widely adopted in digital preservation, library, and archival transfer workflows. Long-term support from the Library of Congress and IETF standardization.</persistence>
     <c2pa-support>
       <mode type="none">BagIt has no native C2PA support. C2PA sidecar files can be included as payload files within a bag; bag-info.txt custom fields could carry AI processing notes by convention.</mode>
