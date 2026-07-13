@@ -10,7 +10,11 @@
     <license>Apache-2.0</license>
     <url type="homepage">https://www.itforarchivists.com/siegfried</url>
     <url type="repo">https://github.com/richardlehane/siegfried</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>none</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Signature-based file format identification tool using PRONOM, LOC FDD, and Wikidata signatures. Outputs format identification results as JSON, CSV, or YAML. Widely used in digital preservation ingest workflows.</description>
     <tcr4cap-comments>
@@ -29,7 +33,11 @@
     <version release-date="2022-12-22">1.6.1</version>
     <license>Apache-2.0</license>
     <url>https://github.com/openpreserve/fido</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>none</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Format Identification for Digital Objects. Python-based PRONOM signature tool from Open Preservation Foundation. Outputs PUID identifiers for identified formats.</description>
     <tcr4cap-comments>
@@ -50,7 +58,11 @@
     <version release-date="2026-05-12">26.05</version>
     <license>BSD-2-Clause</license>
     <url>https://mediaarea.net/en/MediaInfo</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>detect-parse</c2pa-support>
     <description>Technical metadata extraction for audio and video files. As of December 2025 can detect and parse C2PA metadata in JPEG, PNG, and WAV. Outputs technical metadata as XML, JSON, HTML, or plain text. Widely used in broadcast, archives, and repository workflows.</description>
     <tcr4cap-comments>
@@ -69,7 +81,11 @@
     <version release-date="2026-05-27">13.59</version>
     <license>GPL/Artistic</license>
     <url>https://exiftool.org</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>full</depth>
+    </provenance>
     <c2pa-support>detect-parse</c2pa-support>
     <description>Reads and writes metadata in image, audio, and video files. Supports EXIF, IPTC, XMP, and many other mechanisms. C2PA/JUMBF metadata can be read and structurally parsed from JPEG, PNG, TIFF, DNG, MP4, MOV, HEIF, AVIF, WAV, AVI, WebP, PDF, SVG, GIF, and ID3v2. Exiftool can parse the JUMBF hierarchy and express individual CBOR assertion fields as structured tags. C2PA JUMBF data can be deleted from writable formats. ExifTool does not write or cryptographically verify C2PA manifests.</description>
     <tcr4cap-comments>
@@ -89,7 +105,11 @@
     <license>LGPL-2.1</license>
     <url type="homepage">https://jhove.openpreservation.org</url>
     <url type="repo">https://github.com/openpreserve/jhove</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>none</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>JSTOR/Harvard Object Validation Environment. Format validation and characterization for digital objects. Supports AIFF, ASCII, GIF, HTML, JPEG, JPEG 2000, PDF, TIFF, UTF-8, WAVE, and XML.</description>
     <tcr4cap-comments>
@@ -108,7 +128,11 @@
     <version release-date="2026-05-04">8.1.1</version>
     <license>LGPL-2.1/GPL-2.0</license>
     <url>https://ffmpeg.org/ffprobe.html</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Multimedia stream analyzer bundled with FFmpeg. Extracts technical metadata from audio/video containers and streams. Outputs JSON, XML, CSV, or plain text.</description>
     <tcr4cap-comments>
@@ -129,7 +153,11 @@
     <version release-date="2014-01-29">4.4</version>
     <license>Public Domain</license>
     <url>https://github.com/jessek/hashdeep</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Cross-platform checksum computation and audit tool. Supports MD5, SHA-1, SHA-256, Tiger, Whirlpool. hashdeep mode supports recursive directory checksumming and audit against a known-good manifest. Also supports Digital Forensics XML for reporting on checksums and file attributes.</description>
     <tcr4cap-comments>
@@ -148,7 +176,11 @@
     <version>1.14</version>
     <license></license><!-- license info not confirmed -->
     <url type="homepage">https://fixitypro.com</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Standalone fixity checking application. Originally created by AVPS in 2013; transferred to the Open Preservation Foundation (OPF) in September 2025. Monitors file integrity over time with scheduled checks and email reporting. Supports MD5 and SHA-256.</description>
     <tcr4cap-comments>
@@ -167,7 +199,11 @@
     <version release-date="2025-06-13">1.9.0</version>
     <license>CC0-1.0</license>
     <url>https://github.com/LibraryOfCongress/bagit-python</url>
-    <provenance-scope>package-level</provenance-scope>
+    <provenance>
+      <scope>package-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Library of Congress BagIt implementation in Python. Creates and validates BagIt packages (RFC 8493) with payload manifests. Supports MD5, SHA-1, SHA-256, SHA-512.</description>
     <tcr4cap-comments>
@@ -189,7 +225,11 @@
     <license>Public Domain / CC0</license>
     <url type="homepage">https://mediaarea.net/BWFMetaEdit</url>
     <url type="repo">https://github.com/MediaArea/BWFMetaEdit</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Embed, validate, and export metadata in Broadcast WAVE Format files. Supports FADGI, EBU, and BEXT chunk metadata including CodingHistory, originator, origination date/time, and UMID. GUI and CLI.</description>
     <tcr4cap-comments>
@@ -210,7 +250,11 @@
     <version release-date="2026-05-04">8.1.1</version>
     <license>LGPL-2.1/GPL-2.0</license>
     <url>https://ffmpeg.org</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>strips</durability>
+      <depth>none</depth>
+    </provenance>
     <c2pa-support>none-official</c2pa-support>
     <description>Open-source multimedia framework for transcoding, muxing, and processing audio and video. As of June 2026 there is no official C2PA support in the mainline codebase; however, a few ffmpeg forks (c2pa_libffmpeg_eqty) add experimental C2PA manifest embedding in MP4. FFmpeg offers substantial control over preserving metadata while transcoding.</description>
     <tcr4cap-comments>
@@ -230,7 +274,11 @@
     <license>GPL-2.0</license>
     <url type="homepage">https://handbrake.fr</url>
     <url type="repo">https://github.com/HandBrake/HandBrake</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>strips</durability>
+      <depth>none</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Open-source video transcoder with GUI and CLI. Removes most metadata by default during transcoding.</description>
     <tcr4cap-comments>
@@ -252,7 +300,11 @@
     <license>MIT/Apache-2.0</license>
     <url type="homepage">https://opensource.contentauthenticity.org/docs/c2patool/c2patool-index/</url>
     <url type="repo">https://github.com/contentauth/c2pa-rs</url><!-- source moved into c2pa-rs repo in December 2024 -->
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>full</depth>
+    </provenance>
     <c2pa-support>full</c2pa-support>
     <description>The official CLI tool from the Content Authenticity Initiative for reading and writing C2PA manifests. Supports JPEG, PNG, MP4, WAV, and many other formats. Reads and displays manifest content, creates and signs new manifests, verifies manifest signatures and hard binding. Built on the c2pa-rs Rust SDK. Source for c2patool was moved into the contentauth/c2pa-rs repository in December 2024.</description>
     <tcr4cap-comments>
@@ -271,7 +323,11 @@
     <version release-date="2026-06-03">0.26.62</version>
     <license>MIT/Apache-2.0</license>
     <url>https://github.com/contentauth/c2pa-rs</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>full</depth>
+    </provenance>
     <c2pa-support>full</c2pa-support>
     <description>Official Rust SDK for the C2PA specification from the Content Authenticity Initiative. Core library underlying c2patool, c2pa-python, and many other implementations. Provides full C2PA manifest creation, signing, embedding, and verification.</description>
     <tcr4cap-comments>
@@ -290,7 +346,11 @@
     <version release-date="2026-06-03">0.32.12</version>
     <license>MIT/Apache-2.0</license>
     <url>https://github.com/contentauth/c2pa-python</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>full</depth>
+    </provenance>
     <c2pa-support>full</c2pa-support>
     <description>The official Python binding for the c2pa-rs library from the Content Authenticity Initiative. Enables C2PA manifest creation, signing, embedding, and verification in Python workflows. Supports all formats and assertions supported by c2pa-rs.</description>
     <tcr4cap-comments>
@@ -309,7 +369,11 @@
     <version release-date="unknown">online</version>
     <license>Proprietary</license>
     <url>https://contentcredentials.org/verify</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>n/a</durability>
+      <depth>full</depth>
+    </provenance>
     <c2pa-support>full</c2pa-support>
     <description>Online C2PA manifest verification tool from the Content Authenticity Initiative. Upload a file to inspect its Content Credentials. Displays manifest assertions, signing certificate, timestamp, and hard binding status.</description>
     <tcr4cap-comments>
@@ -331,7 +395,11 @@
     <license>AGPL-3.0</license>
     <url type="homepage">https://www.archivematica.org</url>
     <url type="repo">https://github.com/artefactual/archivematica</url>
-    <provenance-scope>package-level</provenance-scope>
+    <provenance>
+      <scope>package-level</scope>
+      <durability>preserves-with-action</durability>
+      <depth>full</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>Open-source digital preservation system implementing the OAIS reference model. Generates PREMIS events, METS/PREMIS packages, and BagIt transfers. Integrates Siegfried, JHOVE, MediaInfo, and ExifTool for format identification and characterization. No native C2PA support as of June 2026.</description>
     <tcr4cap-comments>
@@ -352,7 +420,11 @@
     <version release-date="unknown">unknown</version>
     <license>Proprietary</license>
     <url>https://deepmind.google/models/synthid/</url>
-    <provenance-scope>content-level</provenance-scope>
+    <provenance>
+      <scope>content-level</scope>
+      <durability>preserves</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>SynthID is Google DeepMind's imperceptible watermarking tool for AI-generated images, audio, text, and video. Embeds watermarks directly into content pixels/samples at generation time. Detection requires access to the SynthID detection API. No C2PA support. Operates independently of the C2PA manifest store.</description>
     <tcr4cap-comments>
@@ -373,7 +445,11 @@
     <version release-date="2026-01-19">v122</version>
     <license>Open Government Licence v3.0</license>
     <url>https://www.nationalarchives.gov.uk/PRONOM/</url>
-    <provenance-scope>n/a</provenance-scope>
+    <provenance>
+      <scope>n/a</scope>
+      <durability>n/a</durability>
+      <depth>n/a</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>National Archives UK file format registry. Provides PUID (PRONOM Unique Identifier) identifiers used by Siegfried, FIDO, DROID, and Archivematica for format identification. Maintained by The National Archives with community contributions.</description>
     <tcr4cap-comments>
@@ -394,7 +470,11 @@
     <version>2026.07.04</version>
     <license>Unlicense</license>
     <url type="repo">https://github.com/yt-dlp/yt-dlp</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>strips</durability>
+      <depth>none</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>yt-dlp is a command-line audio/video downloader that supports thousands of websites. It downloads media from web platforms and can embed metadata via FFmpeg post-processing. yt-dlp has no C2PA awareness and does not preserve C2PA manifests during download or re-encoding. When re-encoding is performed (e.g. format conversion or metadata embedding), embedded C2PA data generally does not survive (as per ffmpeg remuxing defaults). Direct downloads without re-encoding may preserve embedded C2PA if the source format and container are retained byte-for-byte.</description>
     <tcr4cap-comments>
@@ -409,12 +489,16 @@
 
   <tool id="rsync">
     <name>rsync</name>
-    <category>Capture and Transmission Tools</category>
+    <type>Capture and Transmission Tools</type>
     <version>3.4.4</version>
     <license>GPL-3.0</license>
     <url type="homepage">https://rsync.samba.org/</url>
     <url type="repo">https://github.com/RsyncProject/rsync</url>
-    <provenance-scope>file-level</provenance-scope>
+    <provenance>
+      <scope>file-level</scope>
+      <durability>preserves</durability>
+      <depth>summary</depth>
+    </provenance>
     <c2pa-support>none</c2pa-support>
     <description>rsync is an open source file synchronization and transfer tool that copies files between systems using a delta-transfer algorithm. rsync transfers files byte-for-byte, so existing, embedded CAP metadata within file structures is preserved. However, rsync has no CAP awareness and does not verify or validate metadata after transfer. Extended attributes are preserved only with the explicit -X/--xattrs flag; the default -a archive mode does not include xattrs.</description>
     <tcr4cap-comments>
