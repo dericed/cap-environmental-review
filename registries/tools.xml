@@ -483,7 +483,7 @@
       <binding>No binding mechanism. Metadata embedded by yt-dlp (via --embed-metadata) is written into standard metadata containers (e.g. MP4 atoms, Matroska tags) with no cryptographic binding to content. Any pre-existing C2PA hard binding is lost if re-encoding occurs.</binding>
       <ai-attribution>No AI attribution support. yt-dlp does not detect or preserve AI provenance metadata from source platforms. YouTube AI disclosure labels and C2PA AI attribution assertions are not captured.</ai-attribution>
       <substantiation>No provenance chain preservation. yt-dlp does not record or append its own download actions to a chain of custody. The --embed-info-json option can write a sidecar JSON file with download metadata (URL, extractor, timestamp), but this is informal and not structured CAP data. The relationship between the info.json sidecar and the media file is not maintained by any binding mechanism.</substantiation>
-      <interoperability>Open source (Unlicense).Cross-platform. Relies on FFmpeg for post-processing, inheriting FFmpeg's format support limitations regarding C2PA preservation.</interoperability>
+      <interoperability>Open source (Unlicense). Cross-platform. Relies on FFmpeg for post-processing, inheriting FFmpeg's format support limitations regarding C2PA preservation.</interoperability>
     </tcr4cap-comments>
   </tool>
 
