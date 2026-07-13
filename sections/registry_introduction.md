@@ -60,7 +60,9 @@ The current (as of the writing of this document) release version of the tool in 
 The software license under which the tool is distributed. Examples: `Apache-2.0`, `MIT/Apache-2.0`, `GPL-2.0`, `LGPL-2.1`, `CC0-1.0`, `Public Domain`, `AGPL-3.0`, `Proprietary`
 
 ### Provenance Scope
-The level at which the tool operates with respect to provenance.
+The level at which the tool operates with respect to provenance, assessed across three dimensions: scope, durability, and depth.
+
+#### Scope
 
 | Value            | Meaning                                                         |
 |------------------|-----------------------------------------------------------------|
@@ -68,6 +70,26 @@ The level at which the tool operates with respect to provenance.
 | `package-level`  | Operates on packages or collections of files (e.g. BagIt bags)  |
 | `content-level`  | Operates on the content signal itself (e.g. watermarking)       |
 | `n/a`            | Not applicable                                                  |
+
+#### Durability
+The extent to which the tool preserves provenance across transformations it performs on the file. Does the tool preserve existing provenance data through its operations? Does it record or append its own actions to the chain of custody?
+
+| Value            | Meaning                                                                                  |
+|------------------|------------------------------------------------------------------------------------------|
+| `preserves`      | Preserves existing provenance data through transformations                               |
+| `preserves-with-action` | Preserves existing provenance and appends its own actions to the chain of custody |
+| `strips`         | Removes or overwrites existing provenance data during operations                         |
+| `n/a`            | Not applicable (tool does not transform content)                                         |
+
+#### Depth
+The extent of provenance detail the tool captures or processes.
+
+| Value            | Meaning                                                                                          |
+|------------------|--------------------------------------------------------------------------------------------------|
+| `full`           | Captures, processes, or preserves complete provenance detail (e.g. full C2PA manifest traversal) |
+| `summary`        | Captures or processes key provenance fields (e.g. tool name, creation date)                      |
+| `none`           | No provenance detail captured or processed                                                       |
+| `n/a`            | Not applicable                                                                                   |
 
 ### C2PA Support
 The degree to which the tool supports the C2PA specification.
