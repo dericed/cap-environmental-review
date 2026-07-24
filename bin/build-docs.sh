@@ -407,7 +407,7 @@ echo "Building registry introduction..."
 {
   html_head "CAP Registry Reference" "intro"
   if [[ -f "$INTRO_MD" ]]; then
-    md_to_html < "$INTRO_MD" || true
+    tail -n +2 "$INTRO_MD" | md_to_html || true
   else
     echo "<p><em>registry_introduction.md not found at ${INTRO_MD}</em></p>"
   fi
