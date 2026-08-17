@@ -13,7 +13,7 @@
       <metadata-integrity type="none">No integrity mechanism covers FLAC metadata blocks (Vorbis Comment, ID3, GEOB, PICTURE). Metadata can be altered without affecting the audio-data checksums.</metadata-integrity>
       <chain-of-custody type="none">No provenance chain or signing mechanism in the base FLAC format specification.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000198" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
+    <fdd-ref id="FDD000198" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
     <metadata-values>
       <field name="MD5 signature" cap-concept="media-integrity">Stored in STREAMINFO block; MD5 of unencoded raw PCM audio data.</field>
       <field name="CRC-8" cap-concept="media-integrity">Per audio frame header; covers frame header bytes up to but not including the CRC byte itself.</field>
@@ -42,8 +42,8 @@
       <metadata-integrity type="none">BEXT fields have no integrity protection; any field can be overwritten without detection.</metadata-integrity>
       <chain-of-custody type="none">No signing or provenance chain mechanism in the BWF/BEXT specification. CodingHistory is a conventional append-only log with no enforcement.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
-    <fdd-ref id="FDD000357" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <fdd-ref id="FDD000356" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
     <metadata-values>
       <field name="Originator" cap-concept="actor-identity">Name of the originating organization; 32 bytes.</field>
       <field name="OriginatorReference" cap-concept="asset-identity">Unique identifier assigned by the originator; 32 bytes.</field>
@@ -74,9 +74,9 @@
       <metadata-integrity type="none">APP segments have no integrity protection in the base specification; segments can be added, removed, or replaced without detection.</metadata-integrity>
       <chain-of-custody type="signed">C2PA manifest store in APP11 provides cryptographic signing and hard binding to image content when implemented.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000017" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml"/>
-    <fdd-ref id="FDD000018" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml"/>
-    <fdd-ref id="FDD000147" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml"/>
+    <fdd-ref id="FDD000017" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml"/>
+    <fdd-ref id="FDD000018" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml"/>
+    <fdd-ref id="FDD000147" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml"/>
     <metadata-values>
       <field name="APP1 (0xFFE1) — EXIF" cap-concept="technical-provenance">Carries EXIF IFD structure with capture device, settings, GPS, and datetime fields.</field>
       <field name="APP1 (0xFFE1) — XMP" cap-concept="provenance-chain">Carries XMP RDF/XML packet including xmpMM:History, xmpMM:DerivedFrom, and IPTC AI fields.</field>
@@ -106,7 +106,7 @@
       <metadata-integrity type="checksum">CRC-32 covers metadata chunks (tEXt, iTXt, eXIf, caBX) as well as image data chunks. Does not detect intentional replacement of a chunk with a recalculated CRC.</metadata-integrity>
       <chain-of-custody type="signed">C2PA manifest store in caBX chunk provides cryptographic signing and hard binding to image content when implemented.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000153" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000153.shtml"/>
+    <fdd-ref id="FDD000153" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000153.shtml"/>
     <metadata-values>
       <field name="caBX chunk" cap-concept="provenance-chain">Carries C2PA manifest store in JUMBF container.</field>
       <field name="eXIf chunk" cap-concept="technical-provenance">Carries EXIF IFD structure with capture device, settings, and datetime fields.</field>
@@ -136,8 +136,8 @@
       <metadata-integrity type="none">IFD tags have no integrity protection; any tag can be overwritten without detection.</metadata-integrity>
       <chain-of-custody type="none">No signing or provenance chain mechanism in the TIFF 6.0 specification. No C2PA embedding defined.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000022" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml"/>
-    <fdd-ref id="FDD000145" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000145.shtml"/>
+    <fdd-ref id="FDD000022" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml"/>
+    <fdd-ref id="FDD000145" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000145.shtml"/>
     <metadata-values>
       <field name="Tag 306 (DateTime)" cap-concept="creation-datetime">Date and time of image creation in YYYY:MM:DD HH:MM:SS format.</field>
       <field name="Tag 271 (Make) / Tag 272 (Model)" cap-concept="actor-identity">Camera manufacturer and model name.</field>
@@ -168,8 +168,8 @@
       <metadata-integrity type="none">Metadata atoms have no integrity protection in the base specification.</metadata-integrity>
       <chain-of-custody type="signed">C2PA manifest store in uuid atom provides cryptographic signing and hard binding to media content when implemented.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000155" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml"/>
-    <fdd-ref id="FDD000525" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000525.shtml"/>
+    <fdd-ref id="FDD000155" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml"/>
+    <fdd-ref id="FDD000525" status="preliminary" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000525.shtml"/>
     <metadata-values>
       <field name="uuid atom (C2PA UUID)" cap-concept="provenance-chain">Carries C2PA manifest store in JUMBF container; UUID value defined in C2PA Technical Specification.</field>
       <field name="uuid atom (XMP UUID)" cap-concept="provenance-chain">Carries XMP RDF/XML packet including xmpMM:History, xmpMM:DerivedFrom, and IPTC AI fields.</field>
@@ -198,7 +198,7 @@
       <metadata-integrity type="checksum">The Tags top-level element SHOULD carry its own CRC-32 child, covering the tag bytes. This allows detection of accidental corruption of the Tags element. It does not prevent intentional modification; any writer can recompute a valid CRC-32 after altering tag values.</metadata-integrity>
       <chain-of-custody type="none">No signing or provenance chain mechanism is defined in the current Matroska specification. No C2PA embedding path is defined in RFC 9559.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000342" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml"/>
+    <fdd-ref id="FDD000342" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml"/>
     <metadata-values>
       <field name="TAG / SimpleTag (TagName=DATE_RECORDED)" cap-concept="creation-datetime">The time that the recording began.</field>
       <field name="TAG / SimpleTag (TagName=DATE_ENCODED)" cap-concept="creation-datetime">The time that encoding of this item was completed.</field>
@@ -239,7 +239,7 @@
       <metadata-integrity type="none">No integrity protection on the Vorbis Comment block; fields can be silently overwritten without detection.</metadata-integrity>
       <chain-of-custody type="none">No provenance chain mechanism in the Vorbis Comment specification.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000198" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
+    <fdd-ref id="FDD000198" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
     <metadata-values>
       <field name="ARTIST" cap-concept="actor-identity">Name of the performing artist or creator.</field>
       <field name="DATE" cap-concept="creation-datetime">Date of recording or release.</field>
@@ -299,8 +299,9 @@
       <metadata-integrity type="none">No integrity protection on the BEXT chunk; fields can be silently overwritten without detection.</metadata-integrity>
       <chain-of-custody type="none">CodingHistory is a conventional append-only log with no enforcement; no signing or provenance chain mechanism.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
-    <fdd-ref id="FDD000357" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <fdd-ref id="FDD000356" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <url type="guidelines">https://www.digitizationguidelines.gov/guidelines/digitize-embedding.html</url>
     <metadata-values>
       <field name="Originator" cap-concept="actor-identity">Name of the originating organization; 32 bytes.</field>
       <field name="OriginatorReference" cap-concept="asset-identity">Unique identifier assigned by the originator; 32 bytes.</field>
@@ -332,7 +333,9 @@
       <metadata-integrity type="none">No integrity protection; fields can be silently overwritten without detection.</metadata-integrity>
       <chain-of-custody type="none">No provenance chain mechanism in the RIFF INFO specification.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000356" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <url type="guidelines">https://www.digitizationguidelines.gov/guidelines/digitize-embedding.html</url>
     <metadata-values>
       <field name="ICRD" cap-concept="creation-datetime">Date of creation.</field>
       <field name="IART" cap-concept="actor-identity">Name of the artist or creator.</field>
@@ -363,6 +366,8 @@
       <chain-of-custody type="none">No provenance chain mechanism in the iXML or aXML specifications.</chain-of-custody>
     </verifiability>
     <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <url type="guidelines">https://www.digitizationguidelines.gov/guidelines/digitize-embedding.html</url>
     <metadata-values>
       <field name="aXML / EBU-ISRC" cap-concept="asset-identity">EBU International Standard Recording Code and additional production metadata.</field>
       <field name="iXML / RECORDER" cap-concept="actor-identity">Name and model of the recording device.</field>
@@ -392,6 +397,8 @@
       <chain-of-custody type="none">No signing or provenance chain mechanism; the MD5 value itself is not signed and could be replaced along with modified audio data.</chain-of-custody>
     </verifiability>
     <fdd-ref id="FDD000356" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
+    <url type="guidelines">https://www.digitizationguidelines.gov/guidelines/digitize-embedding.html</url>
     <metadata-values>
       <field name="MD5 digest (audio data chunk)" cap-concept="media-integrity">MD5 hash of the WAVE data chunk payload, excluding chunk ID, size declaration, and optional padding byte.</field>
     </metadata-values>
@@ -486,8 +493,10 @@
       <metadata-integrity type="none">EXIF data has no integrity protection; tags can be silently overwritten or stripped.</metadata-integrity>
       <chain-of-custody type="none">No provenance chain mechanism in the EXIF specification.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="FDD000146" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000146.shtml"/>
-    <fdd-ref id="FDD000618" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000618.shtml"/>
+    <fdd-ref id="FDD000145" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000145.shtml"/>
+    <fdd-ref id="FDD000146" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000146.shtml"/>
+    <fdd-ref id="FDD000147" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml"/>
+    <fdd-ref id="FDD000618" status="full" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000618.shtml"/>
     <metadata-values>
       <field name="Make (0x010F) / Model (0x0110)" cap-concept="actor-identity">Camera manufacturer and model name.</field>
       <field name="Software (0x0131)" cap-concept="actor-identity">Name and version of software used to process the image.</field>
@@ -553,7 +562,7 @@
       <metadata-integrity type="signed">Each manifest is cryptographically signed using CMS/COSE. Any modification to a manifest's assertions or claim invalidates the signature.</metadata-integrity>
       <chain-of-custody type="signed">The manifest store is append-only; prior manifests are preserved as ingredient references. The full provenance chain is verifiable against the signing certificate chain and optional timestamp authority.</chain-of-custody>
     </verifiability>
-    <fdd-ref id="none" status="none"/>
+    <fdd-ref id="FDD000653" status="partial" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000653.shtml"/>
     <metadata-values>
       <field name="c2pa.claim.generator" cap-concept="actor-identity">Software or hardware that generated the C2PA claim.</field>
       <field name="c2pa.actions" cap-concept="transformation-history">Ordered list of actions performed on the asset (c2pa.created, c2pa.edited, c2pa.converted, c2pa.transcoded, etc.).</field>
