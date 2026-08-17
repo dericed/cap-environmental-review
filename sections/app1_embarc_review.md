@@ -46,7 +46,7 @@ C2PA supports a more reasonable approach for DPX in the possibility of storing M
 
 embARC's recent refactor established that corrections are applied by rewriting only the specific header byte ranges that need to change, leaving the image data region untouched. Embedding a JUMBF manifest store in the DPX user-defined data area would require writing to a region of the file outside the specific header bytes being corrected, affecting byte offsets and potentially requiring validation of the full file structure. For a 100,000-frame sequence at roughly 50MB per frame, any approach that requires extending the metadata header can require terabytes of I/O for what would otherwise be a basic metadata operation.
 
-There is also a challenge with C2PA manifest sizing. A collection-level C2PA manifest for 100,000 files could require 6–8MB of CBOR-encoded assertion data. Distributing manifest content across 100,000 separate file headers would require a different manifest per file, expanding every file in the sequence. A sidecar C2PA approach would achieve the same provenance goals without the burdensome costs associated with embedded this data.
+There is also a challenge with C2PA manifest sizing. A collection-level C2PA manifest for 100,000 files could require 7-11MB of CBOR-encoded assertion data. Distributing manifest content across 100,000 separate file headers would require a different manifest per file, expanding every file in the sequence. A sidecar C2PA approach would achieve the same provenance goals without the burdensome costs associated with embedded this data.
 
 ## 4. Options Considered
 
