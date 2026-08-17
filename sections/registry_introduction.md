@@ -16,6 +16,7 @@ One or more reference URLs. Each URL may include an optional **type** attribute 
 | `repo`      | Source code repository (e.g. GitHub)                 |
 | `spec`      | Normative specification document                     |
 | `fdd`       | Library of Congress Format Description Document      |
+| `guidelines`| Recommendations and/or rules on implementations      |
 | *(none)*    | General reference with no specific type assigned     |
 
 ### Description
