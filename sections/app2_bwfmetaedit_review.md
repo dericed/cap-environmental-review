@@ -9,6 +9,7 @@ BWF MetaEdit is the FADGI-managed, open-source, cross-platform application for i
 The bext chunk carries several fields directly relevant to provenance documentation:
 
 | Field               | Role |
+|---------------------|------|
 | Description         | Free-text description of the audio content or the digitization event. |
 | Originator          | Institution or entity responsible for the file. |
 | OriginatorReference | Unique identifier for the file within the originator's system. |
