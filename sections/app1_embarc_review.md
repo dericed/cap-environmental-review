@@ -42,7 +42,7 @@ The C2PA specification defines embedding mechanisms for a specific set of format
 
 C2PA supports a more reasonable approach for DPX in the possibility of storing Manifest Stores external to the asset they describe, in the form of sidecar files.
 
-### Why Embedding C2PA Data in DPX Files Is Impractical for embARC
+### Why Embedding C2PA Data in DPX Files Is Impractical
 
 embARC's recent refactor established that corrections are applied by rewriting only the specific header byte ranges that need to change, leaving the image data region untouched. Embedding a JUMBF manifest store in the DPX user-defined data area would require writing to a region of the file outside the specific header bytes being corrected, affecting byte offsets and potentially requiring validation of the full file structure. For a 100,000-frame sequence at roughly 50MB per frame, any approach that requires extending the metadata header can require terabytes of I/O for what would otherwise be a basic metadata operation.
 
@@ -50,7 +50,7 @@ There is also a challenge with C2PA manifest sizing. A collection-level C2PA man
 
 ## 4. Options Considered
 
-Four options were considered for adding C2PA support to embARC.
+Four options were considered for adding C2PA support to DPX.
 
 **Option 1: Per-file sidecar manifests.** Here a separate `.c2pa` file could be generated alongside each DPX file, with the same base filename. Each sidecar could contain a C2PA manifest with a `c2pa.hash.data` assertion hashing the full DPX file (or the image data portion with appropriate exclusions), a `c2pa.actions` assertion recording what embARC did, and claim generator information identifying embARC. For a potentially 100,000 file DPX sequence this would produce 100,000 sidecar files, doubling the file count of the directory. Each sidecar would require an individual signing operation. Such an approach would be specification compliant but operationally burdensome at scale.
 
