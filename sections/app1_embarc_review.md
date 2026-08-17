@@ -98,7 +98,7 @@ A simplified representation of the manifest structure (actual encoding is CBOR/J
       "data": {
         "actions": [
           {
-            "action": "fadgi.metadata_update",
+            "action": "gov.digitizationguidelines.metadata_update",
             "description": "DPX header metadata updated per FADGI guidelines. Image data not modified.",
             "parameters": {
               "fields_modified": [
@@ -161,10 +161,10 @@ Given that the design of embARC specifically avoids any edit to image content bu
 
 The C2PA standard defines a set of actions including `c2pa.created`, `c2pa.opened`, `c2pa.edited`, `c2pa.resized`, `c2pa.cropped`, `c2pa.color_adjustments`, `c2pa.transcoded`, `c2pa.repackaged`, `c2pa.placed`, `c2pa.removed`, and `c2pa.redacted`. Of these, `c2pa.repackaged` is the closest standard action to a metadata-only header edit as it is defined as changing the container file format without transcoding. However, the spec requires that `c2pa.repackaged` have one or more associated ingredients. This creates a dependency on the ingredients model for any manifest that uses `c2pa.repackaged`, even for a first-in-chain operation where no prior manifest exists.
 
-A custom FADGI-defined action, such as `fadgi.metadata_update`, could be more semantically precise for embARC's operations and would avoid the ingredient requirement that `c2pa.repackaged` imposes. Custom actions are permitted by the specifications and defining a FADGI action vocabulary for archival metadata operations could form the basis of practical community contributions or proposals to ongoing C2PA specification development.
+A custom FADGI-defined action, such as `gov.digitizationguidelines.metadata_update`, could be more semantically precise for embARC's operations and would avoid the ingredient requirement that `c2pa.repackaged` imposes. Custom actions are permitted by the specifications and defining a FADGI action vocabulary for archival metadata operations could form the basis of practical community contributions or proposals to ongoing C2PA specification development.
 
 **Actions in scope for embARC:**
-- Metadata update (custom `fadgi.metadata_update` or a `gov.digitizationguidelines.metadata_update`): embARC updates DPX header fields without modifying image data.
+- Metadata update (custom `gov.digitizationguidelines.metadata_update` or a `gov.digitizationguidelines.metadata_update`): embARC updates DPX header fields without modifying image data.
 - Batch header correction: same as above, applied across a sequence as a single action.
 - Audit/validation: embARC auditing and other actions to assess or report on DPX sequences without modifying them.
 
