@@ -88,42 +88,42 @@ A simplified representation of the manifest structure (actual encoding is CBOR/J
 
 ```json
 {
-  &quot;claim_generator&quot;: &quot;embARC/2.0&quot;,
-  &quot;claim_generator_info&quot;: [
-    { &quot;name&quot;: &quot;embARC&quot;, &quot;version&quot;: &quot;2.0&quot; }
+  "claim_generator": "embARC/2.0",
+  "claim_generator_info": [
+    { "name": "embARC", "version": "2.0" }
   ],
-  &quot;assertions&quot;: [
+  "assertions": [
     {
-      &quot;label&quot;: &quot;c2pa.actions&quot;,
-      &quot;data&quot;: {
-        &quot;actions&quot;: [
+      "label": "c2pa.actions",
+      "data": {
+        "actions": [
           {
-            &quot;action&quot;: &quot;fadgi.metadata_update&quot;,
-            &quot;description&quot;: &quot;DPX header metadata updated per FADGI guidelines. Image data not modified.&quot;,
-            &quot;parameters&quot;: {
-              &quot;fields_modified&quot;: [
-                &quot;Field 12 Creator&quot;,
-                &quot;Field 13 Project name&quot;,
-                &quot;Field 76 FADGI Process History&quot;
+            "action": "fadgi.metadata_update",
+            "description": "DPX header metadata updated per FADGI guidelines. Image data not modified.",
+            "parameters": {
+              "fields_modified": [
+                "Field 12 Creator",
+                "Field 13 Project name",
+                "Field 76 FADGI Process History"
               ],
-              &quot;image_data_modified&quot;: false
+              "image_data_modified": false
             }
           }
         ]
       }
     },
     {
-      &quot;label&quot;: &quot;c2pa.hash.collection.data&quot;,
-      &quot;data&quot;: {
-        &quot;alg&quot;: &quot;sha256&quot;,
-        &quot;uris&quot;: [
+      "label": "c2pa.hash.collection.data",
+      "data": {
+        "alg": "sha256",
+        "uris": [
           {
-            &quot;uri&quot;: &quot;MyFilm_Reel1/MyFilm_Reel1_000001.dpx&quot;,
-            &quot;hash&quot;: &quot;e3b0c44298fc1c149afb...&quot;
+            "uri": "MyFilm_Reel1/MyFilm_Reel1_000001.dpx",
+            "hash": "e3b0c44298fc1c149afb..."
           },
           {
-            &quot;uri&quot;: &quot;MyFilm_Reel1/MyFilm_Reel1_000002.dpx&quot;,
-            &quot;hash&quot;: &quot;a665a45920422f9d417e...&quot;
+            "uri": "MyFilm_Reel1/MyFilm_Reel1_000002.dpx",
+            "hash": "a665a45920422f9d417e..."
           }
         ]
       }
@@ -276,20 +276,20 @@ embARC's CLI currently supports batch metadata header auditing and updating. The
 ### embARC C2PA Command Line Examples
 
 ```shell
-\# Audit sequence, correct header fields, and generate a signed C2PA sidecar:
+# Audit sequence, correct header fields, and generate a signed C2PA sidecar:
 embarc --correct --fields=12,13,76 \
        --c2pa-generate --c2pa-sign=/etc/embarc/fadgi_embarc_signing.pem \
        /scans/Example_Film_Reel1/
 
-\# Generate a sidecar that chains from a prior operation:
+# Generate a sidecar that chains from a prior operation:
 embarc --correct --fields=76 \
        --c2pa-generate --c2pa-sign=/etc/embarc/fadgi_embarc_signing.pem \
        --c2pa-ingredient=/scans/Example_Film_Reel1/Example_Film_Reel1.c2pa \
        /scans/Example_Film_Reel1/
 
-\# Read and display existing provenance alongside an audit report:
+# Read and display existing provenance alongside an audit report:
 embarc --audit --c2pa-read /scans/Example_Film_Reel1/
 
-\# Validate sidecar integrity after transfer:
+# Validate sidecar integrity after transfer:
 embarc --c2pa-validate /scans/Example_Film_Reel1/
 ```
