@@ -138,11 +138,6 @@ bwfmetaedit --MD5-embed --c2pa-generate --c2pa-include-md5 \
             --c2pa-sign=/etc/bwfmetaedit/loc_signing.pem \
             Example_Recording_001.wav
 
-# Generate a session-level collection sidecar across a batch:
-bwfmetaedit --c2pa-generate --c2pa-batch-sidecar \
-            --c2pa-sign=/etc/bwfmetaedit/loc_signing.pem \
-            /audio/Example_Session/*.wav
-
 # Read existing provenance alongside standard metadata report:
 bwfmetaedit --out-core --c2pa-read Example_Recording_001.wav
 
