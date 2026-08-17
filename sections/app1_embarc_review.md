@@ -236,6 +236,7 @@ embARC's CLI currently supports batch metadata header auditing and updating. The
     Required when --c2pa-generate is specified and no default credential is
     configured.
 
+# note that --c2pa-hash-scope would only be relevant for C2PA documentation of individual DPX files and not sequences.
 --c2pa-hash-scope=image-data|full-file
     Controls which portion of each DPX file is hashed in the
     c2pa.hash.collection.data assertion.
