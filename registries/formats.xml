@@ -69,10 +69,10 @@
     <name>JPEG</name>
     <type>image</type>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml</url>
-     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml</url>
-     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml</url>
-     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000653.shtml</url>
-     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000655.shtml</url>
+    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml</url>
+    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml</url>
+    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000653.shtml</url>
+    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000655.shtml</url>
     <url type="homepage">https://jpeg.org/</url>
     <structure>binary-segment</structure>
     <readability type="open">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
