@@ -150,6 +150,13 @@ The highest level of integrity or authenticity verification the format supports.
 | `integrity-only`           | Fixity values or checksums present; but not necessary signing or provenance chain |
 | `none`                     | No integrity or authenticity mechanism                         |
 
+### Persistence
+A description of the format's suitability and institutional support for long-term preservation. This field is descriptive (no controlled vocabulary) and should address:
+- Whether the format is widely adopted as an archival primary format
+- The level of long-term institutional support (standards bodies, community organizations, national archives)
+- Any relevant recommendations from FADGI or other professional guidelines
+- Known limitations on archival use (e.g., lossy compression, proprietary dependencies)
+
 ### C2PA Support Modes
 A format may support C2PA delivery via one or more modes. Each mode has a `type` attribute:
 
