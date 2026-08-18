@@ -11,7 +11,7 @@
     <structure>binary-chunk</structure>
     <readability type="open">EBU Tech 3285 and FADGI specifications are publicly available; no licensing restrictions on implementation or use.</readability>
     <verifiability type="integrity-only">No native cryptographic signing. BEXT chunk carries CodingHistory, originator, and origination date/time as advisory provenance fields. BWF may store XMP data. C2PA stored in a custom C2PA RIFF chunk provides cryptographic signing when present.</verifiability>
-    <persistence type="high">Widely adopted archival audio format with long-term institutional support from EBU, FADGI, and national archives.</persistence>
+    <persistence>Widely adopted archival audio format with long-term institutional support from EBU, FADGI, and national archives.</persistence>
     <c2pa-support>
       <mode type="embedded-riff-chunk">C2PA manifest store may be embedded in a custom C2PA RIFF chunk within the BWF file; hard binding to audio content via C2PA cryptographic signing chain.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the BWF asset; uses C2PA soft binding. Relationship must be maintained by the packaging or delivery layer.</mode>
@@ -42,7 +42,7 @@
     <structure>binary-block</structure>
     <readability type="open">Full open specification originally published by Xiph.org and later standardized as IETF RFC 9639; no licensing restrictions on implementation or use.</readability>
     <verifiability type="integrity-only">Natively stores an MD5 signature of unencoded audio in the STREAMINFO block and CRC-8/CRC-16 checksums per frame (RFC 9639). Provides format-level integrity verification of audio data only; checksums do not cover metadata blocks. No signature or provenance chain in the base format.</verifiability>
-    <persistence type="high">Open, lossless, widely implemented format. Long-term institutional support via IETF standardization (RFC 9639).</persistence>
+    <persistence>Open, lossless, widely implemented format. Long-term institutional support via IETF standardization (RFC 9639).</persistence>
     <c2pa-support>
       <mode type="embedded-via-id3">C2PA manifest store embedded using the ID3 General Encapsulated Object frame (GEOB); hard binding to audio content via C2PA cryptographic signing chain.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the FLAC asset; uses C2PA soft binding. Relationship must be maintained by the packaging or delivery layer.</mode>
@@ -78,7 +78,7 @@
     <structure>binary-segment</structure>
     <readability type="published-standard">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
-    <persistence type="medium">Lossy compression limits use as an archival master or primary format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
+    <persistence>Lossy compression limits use as an archival master or primary format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
     <c2pa-support>
       <mode type="embedded-app11">C2PA manifest store embedded in APP11 (0xFFEB) chunk. Multiple sequential APP11 segments used for large manifests. Hard binding to image content via content hash. The C2PA Technical Specifications cite JPEG XT, ISO/IEC 18477-3 (which defines the JPEG file format) as the basis of the definition of the APP11 structure that stores the C2PA manifest store. If a manifest is embedded in the center of a JPEG-1 file in an APP11 segment, the claim creator may exclude the APP11 segment(s) from the hash calculation, as defined in C2PA specification 2.4.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
@@ -109,7 +109,7 @@
     <structure>binary-chunk</structure>
     <readability type="open">ISO/IEC 15948 and W3C PNG specification; open standard with no licensing restrictions.</readability>
     <verifiability type="signed">C2PA stored in custom caBX chunk provides cryptographic signing and hard binding to image content. XMP and EXIF metadata in iTXt/eXIf chunks are informative and not integrity-protected. PNG CRC checksums provide per-chunk structural integrity only.</verifiability>
-    <persistence type="high">Lossless compression; widely used as an archival and distribution format for images requiring transparency or lossless fidelity. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
+    <persistence>Lossless compression; widely used as an archival and distribution format for images requiring transparency or lossless fidelity. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
     <c2pa-support>
       <mode type="embedded-cabx-chunk">C2PA manifest store embedded in custom caBX chunk. Hard binding to image content via content hash.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
@@ -141,7 +141,7 @@
     <structure>binary</structure>
     <readability type="open">Open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="signed">C2PA manifests can be natively embedded in TIFF via a JUMBF box stored in the IFD structure, as defined in C2PA specification 2.4, providing cryptographic signing and hard binding to the content. A sidecar .c2pa file is also supported as an alternative delivery path. Native TIFF metadata (EXIF, IPTC, XMP) is informative and not integrity-protected outside of C2PA.</verifiability>
-    <persistence type="high">Widely used archival image format; long-term institutional support from libraries, archives, and digitization programs. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
+    <persistence>Widely used archival image format; long-term institutional support from libraries, archives, and digitization programs. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
     <c2pa-support>
         <mode type="embedded-jumbf-ifd">C2PA manifest store embedded via a JUMBF box stored in the TIFF IFD structure, as defined in C2PA specification 2.4. Hard binding to image content via C2PA cryptographic signing chain. Use of a general box binding is strongly recommended per C2PA guidance.</mode>
         <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the TIFF asset; uses C2PA soft binding. Relationship must be maintained by the packaging or delivery layer.</mode>
@@ -176,7 +176,7 @@
     <structure>binary-atom</structure>
     <readability type="published-standard">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
     <verifiability type="signed">C2PA stored in uuid atom provides cryptographic signing and hard binding to video content. XMP and other metadata atoms are informative and not integrity-protected.</verifiability>
-    <persistence type="high">Widely used video container format; long-term institutional support from ISO, MPEG, and industry. Widely used for archival and distribution of video content.</persistence>
+    <persistence>Widely used video container format; long-term institutional support from ISO, MPEG, and industry. Widely used for archival and distribution of video content.</persistence>
     <c2pa-support>
       <mode type="embedded-uuid-atom">C2PA manifest store embedded in uuid atom (UUID: d8fec3d6-1b0e-483c-9297-5844b8f49b68). Hard binding to video content via content hash. Covers MP4, MOV, MJ2, 3GP, and other ISO-BMFF derivatives.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
@@ -206,7 +206,7 @@
     <structure>binary-ebml</structure>
     <readability type="open">Matroska specification published by the Matroska.org community; IETF RFC 9559 (EBML) provides the underlying container standard.</readability>
     <verifiability type="none">No native cryptographic signing (though an early EBML draft included an Element signing feature which was dropped before standardization). Tag and attachment elements can store UTF-8 and binary metadata. Any Matroska Element may store a hash of the following content of the Element. This feature can verify integrity of the Element against the stored hash (if it exists), but there is no signature mechanism. No C2PA embedding path is defined in the C2PA Technical Specification as of 2026-06.</verifiability>
-    <persistence type="high">Open container format. Widely used in archival video workflows and video distribution. Long-term support from the Matroska community and IETF Cellar working group.</persistence>
+    <persistence>Open container format. Widely used in archival video workflows and video distribution. Long-term support from the Matroska community and IETF Cellar working group.</persistence>
     <c2pa-support>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file alongside the MKV asset; uses C2PA soft binding. No native MKV embedding path is defined in the C2PA Technical Specification as of 2026-05.</mode>
     </c2pa-support>
@@ -234,7 +234,7 @@
     <structure>cbor-jumbf</structure>
     <readability type="published-standard">C2PA Technical Specification published by the Coalition for Content Provenance and Authenticity; open specification with reference implementation (c2pa-rs) under open-source license.</readability>
     <verifiability type="signed">Each manifest is cryptographically signed using CMS/COSE. Hard binding links the manifest to the asset content via content hash. The manifest store is append-only; prior manifests are preserved as ingredient references. Any modification to a manifest or to the asset content invalidates the signature or binding.</verifiability>
-    <persistence type="high">Append-only manifest store preserves the full provenance chain across the asset lifecycle. Signed manifests are immutable. External trust anchors (TSA, credential issuers) provide long-term verifiability.</persistence>
+    <persistence>Append-only manifest store preserves the full provenance chain across the asset lifecycle. Signed manifests are immutable. External trust anchors (TSA, credential issuers) provide long-term verifiability.</persistence>
     <c2pa-support>
       <mode type="embedded">Embedded in host files via format-specific JUMBF containers (APP11 in JPEG, caBX in PNG, uuid atom in MP4/ISOBMFF, C2PA RIFF chunk in WAV/BWF).</mode>
       <mode type="sidecar">Stored as a standalone .c2pa sidecar file alongside the asset.</mode>
@@ -256,7 +256,7 @@
     <structure>xml-rdf</structure>
     <readability type="published-standard">ISO 16684; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="none">XMP packets have no integrity protection; properties can be silently overwritten or the entire packet stripped without detection. xmpMM:History entries are advisory and unverified.</verifiability>
-    <persistence type="medium">XMP packets can be stripped by processing tools; persistence depends on tool behavior and workflow policy. Sidecar .xmp files can be managed independently.</persistence>
+    <persistence>XMP packets can be stripped by processing tools; persistence depends on tool behavior and workflow policy. Sidecar .xmp files can be managed independently.</persistence>
     <c2pa-support>
       <mode type="none">XMP has no native C2PA support. IPTC 2025.1 AI fields carried in XMP namespaces provide structured AI attribution but without cryptographic protection.</mode>
     </c2pa-support>
@@ -277,7 +277,7 @@
     <structure>binary</structure>
     <readability type="open">CIPA DC-008; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="none">EXIF data has no integrity protection; tags can be silently overwritten or stripped without detection. No provenance chain mechanism in the EXIF specification.</verifiability>
-    <persistence type="medium">EXIF data can be stripped by processing tools; persistence depends on tool behavior and workflow policy.</persistence>
+    <persistence>EXIF data can be stripped by processing tools; persistence depends on tool behavior and workflow policy.</persistence>
     <c2pa-support>
       <mode type="none">EXIF has no native C2PA support. EXIF capture device and datetime fields are referenced by C2PA assertions but are not themselves integrity-protected.</mode>
     </c2pa-support>
@@ -298,7 +298,7 @@
     <structure>xml-xmp</structure>
     <readability type="open">IPTC Photo Metadata Standard published by IPTC; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="none">IPTC fields carried in XMP have no integrity protection; fields can be silently overwritten or stripped without detection.</verifiability>
-    <persistence type="medium">IPTC fields carried in XMP can be stripped by processing tools; persistence depends on tool behavior and workflow policy.</persistence>
+    <persistence>IPTC fields carried in XMP can be stripped by processing tools; persistence depends on tool behavior and workflow policy.</persistence>
     <c2pa-support>
       <mode type="none">IPTC Photo Metadata has no native C2PA support. IPTC 2025.1 AI fields provide structured AI attribution in XMP namespaces but without cryptographic protection.</mode>
     </c2pa-support>
@@ -319,7 +319,7 @@
     <structure>xml</structure>
     <readability type="open">PREMIS Data Dictionary published by the Library of Congress; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="integrity-only">PREMIS XML has no native integrity protection; tamper-evidence depends on the repository or packaging layer (e.g. BagIt fixity, audit logs). Fixity values in objectCharacteristics/fixity link the PREMIS record to a specific file state.</verifiability>
-    <persistence type="high">PREMIS is designed for long-term institutional preservation. Widely implemented in repository systems with long-term support from the Library of Congress.</persistence>
+    <persistence>PREMIS is designed for long-term institutional preservation. Widely implemented in repository systems with long-term support from the Library of Congress.</persistence>
     <c2pa-support>
       <mode type="none">PREMIS has no native C2PA support. PREMIS events map conceptually to C2PA actions (c2pa.created, c2pa.converted, c2pa.edited); PREMIS agent maps to C2PA softwareAgent or person assertions.</mode>
     </c2pa-support>
@@ -340,7 +340,7 @@
     <structure>text-manifest</structure>
     <readability type="open">IETF RFC 8493; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="integrity-only">Manifest files (manifest-*.txt) record checksums for all payload files; tag manifests (tagmanifest-*.txt) record checksums for all tag files. Any modification to a payload or tag file produces a checksum mismatch detectable by bag validation. No signing mechanism; the manifest files themselves could be replaced along with modified payload files without detection at the BagIt level.</verifiability>
-    <persistence type="high">BagIt is widely adopted in digital preservation, library, and archival transfer workflows. Long-term support from the Library of Congress and IETF standardization.</persistence>
+    <persistence>BagIt is widely adopted in digital preservation, library, and archival transfer workflows. Long-term support from the Library of Congress and IETF standardization.</persistence>
     <c2pa-support>
       <mode type="none">BagIt has no native C2PA support. C2PA sidecar files can be included as payload files within a bag; bag-info.txt custom fields could carry AI processing notes by convention.</mode>
     </c2pa-support>
@@ -361,7 +361,7 @@
     <structure>xml</structure>
     <readability type="open">METS schema published by the Library of Congress; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="integrity-only">METS XML has no native integrity protection; tamper-evidence depends on the repository or packaging layer. METS can carry fixity values for described files in the fileSec/fileGrp/file/FLocat elements.</verifiability>
-    <persistence type="high">METS is designed for long-term institutional preservation. Widely implemented in repository systems with long-term support from the Library of Congress.</persistence>
+    <persistence>METS is designed for long-term institutional preservation. Widely implemented in repository systems with long-term support from the Library of Congress.</persistence>
     <c2pa-support>
       <mode type="none">METS has no native C2PA support. METS can reference C2PA sidecar files as file objects within the fileSec; PREMIS events carried in the amdSec can document C2PA-related processing actions.</mode>
     </c2pa-support>
