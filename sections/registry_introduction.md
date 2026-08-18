@@ -147,7 +147,7 @@ The highest level of integrity or authenticity verification the format supports.
 | Value                      | Meaning                                                        |
 |----------------------------|----------------------------------------------------------------|
 | `signed`                   | Cryptographic signature with hard binding to content           |
-| `integrity-only`           | Fixity values or checksums present; but not necessary signing or provenance chain |
+| `integrity-only`           | Fixity values or checksums present; but not necessary signed or provenance chain |
 | `none`                     | No integrity or authenticity mechanism                         |
 
 ### Persistence
