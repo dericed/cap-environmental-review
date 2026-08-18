@@ -129,7 +129,7 @@
       <binding>C2PA hard binding via content hash provides cryptographic linkage between manifest and image content.</binding>
       <ai-attribution>C2PA AI attribution assertions and IPTC 2025.1 AI fields are both supported in PNG.</ai-attribution>
       <substantiation>C2PA manifest store preserves full transformation history. External trust anchors supported.</substantiation>
-      <interoperability>Open standard. Widely implemented across image editing tools, browsers, and repository systems.</interoperability>
+      <interoperability>Widely implemented across image editing tools, browsers, and repository systems.</interoperability>
     </tcr4cap-comments>
   </format>
 
@@ -194,7 +194,7 @@
       <binding>C2PA hard binding via content hash provides cryptographic linkage between manifest and video content.</binding>
       <ai-attribution>C2PA AI attribution assertions (c2pa.ai.generatedWith, c2pa.training-mining) are fully supported in MP4/ISOBMFF.</ai-attribution>
       <substantiation>C2PA manifest store preserves full transformation history. External trust anchors supported.</substantiation>
-      <interoperability>Open standard. Universally implemented across video tools, cameras, and repository systems.</interoperability>
+      <interoperability>Universally implemented across video tools, cameras, and repository systems.</interoperability>
     </tcr4cap-comments>
   </format>
 
@@ -309,7 +309,7 @@
       <binding>IPTC fields are structurally embedded via XMP in host files but there is no cryptographic binding between field values and the image content.</binding>
       <ai-attribution>Version 2025.1 defines AiPrompt, AiSystemUsed, AiSystemVersion, and DataMiningPermission as purpose-built, standardized AI attribution fields within the IPTC vocabulary.</ai-attribution>
       <substantiation>IPTC fields provide a structured, readable provenance record. The standard is publicly documented.</substantiation>
-      <interoperability>Open standard. Implemented in photo editing, DAM, and publishing tools including Adobe Photoshop, Lightroom, and Capture One.</interoperability>
+      <interoperability>Implemented in photo editing, DAM, and publishing tools including Adobe Photoshop, Lightroom, and Capture One.</interoperability>
     </tcr4cap-comments>
   </format>
 
