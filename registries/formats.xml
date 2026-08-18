@@ -76,7 +76,7 @@
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000655.shtml</url>
     <url type="homepage">https://jpeg.org/</url>
     <structure>binary-segment</structure>
-    <readability type="open">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
+    <readability type="published-standard">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="signed">C2PA stored in APP11 (0xFFEB) chunk provides cryptographic signing and hard binding to image content. EXIF, IPTC, and XMP metadata in APP1/APP13 are informative and not integrity-protected. JPEG Trust (ISO/IEC 21617) provides an additional trust framework.</verifiability>
     <persistence type="medium">Lossy compression limits use as an archival master or primary format; widely used for distribution and delivery. C2PA manifest survives most JPEG-preserving operations.</persistence>
     <c2pa-support>
@@ -174,7 +174,7 @@
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000079.shtml</url>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml</url>
     <structure>binary-atom</structure>
-    <readability type="open-spec">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
+    <readability type="published-standard">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
     <verifiability type="signed">C2PA stored in uuid atom provides cryptographic signing and hard binding to video content. XMP and other metadata atoms are informative and not integrity-protected.</verifiability>
     <persistence type="high">Widely used video container format; long-term institutional support from ISO, MPEG, and industry. Widely used for archival and distribution of video content.</persistence>
     <c2pa-support>
@@ -232,7 +232,7 @@
     <name>C2PA Manifest (Content Credentials)</name>
     <type>metadata</type>
     <structure>cbor-jumbf</structure>
-    <readability type="open-spec">C2PA Technical Specification published by the Coalition for Content Provenance and Authenticity; open specification with reference implementation (c2pa-rs) under open-source license.</readability>
+    <readability type="published-standard">C2PA Technical Specification published by the Coalition for Content Provenance and Authenticity; open specification with reference implementation (c2pa-rs) under open-source license.</readability>
     <verifiability type="signed">Each manifest is cryptographically signed using CMS/COSE. Hard binding links the manifest to the asset content via content hash. The manifest store is append-only; prior manifests are preserved as ingredient references. Any modification to a manifest or to the asset content invalidates the signature or binding.</verifiability>
     <persistence type="high">Append-only manifest store preserves the full provenance chain across the asset lifecycle. Signed manifests are immutable. External trust anchors (TSA, credential issuers) provide long-term verifiability.</persistence>
     <c2pa-support>
@@ -254,7 +254,7 @@
     <name>XMP (Extensible Metadata Platform)</name>
     <type>metadata</type>
     <structure>xml-rdf</structure>
-    <readability type="open">ISO 16684; open standard with no licensing restrictions on implementation or use.</readability>
+    <readability type="published-standard">ISO 16684; open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="none">XMP packets have no integrity protection; properties can be silently overwritten or the entire packet stripped without detection. xmpMM:History entries are advisory and unverified.</verifiability>
     <persistence type="medium">XMP packets can be stripped by processing tools; persistence depends on tool behavior and workflow policy. Sidecar .xmp files can be managed independently.</persistence>
     <c2pa-support>
