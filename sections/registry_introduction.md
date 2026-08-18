@@ -138,8 +138,8 @@ The extent to which the format specification is openly available.
 
 | Value         | Meaning                                                               |
 |---------------|-----------------------------------------------------------------------|
-| `open`        | Specification is publicly available with no licensing restrictions    |
-| `open-spec`   | Open published specification; reference implementation is open-source |
+| `open`        | Specification is publicly available at no cost no licensing restrictions on implementations. |
+| `open-spec`   | The specification is published openly, but may have licensing or patent impacts. |
 
 ### Verifiability (`type` attribute)
 The highest level of integrity or authenticity verification the format supports.

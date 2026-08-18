@@ -174,7 +174,7 @@
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000079.shtml</url>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml</url>
     <structure>binary-atom</structure>
-    <readability type="open">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
+    <readability type="open-spec">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
     <verifiability type="signed">C2PA stored in uuid atom provides cryptographic signing and hard binding to video content. XMP and other metadata atoms are informative and not integrity-protected.</verifiability>
     <persistence type="high">Widely used video container format; long-term institutional support from ISO, MPEG, and industry. Widely used for archival and distribution of video content.</persistence>
     <c2pa-support>
