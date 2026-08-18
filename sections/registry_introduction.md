@@ -241,10 +241,12 @@ The extent to which the mechanism supports a verifiable provenance chain linking
 ### FDD References
 Links to Library of Congress Format Description Documents (FDDs) that describe the format or mechanism. Each reference carries a `status` attribute:
 
-| Value     | Meaning                                                                |
-|-----------|------------------------------------------------------------------------|
-| `partial` | The FDD exists and is relevant but does not fully cover this mechanism |
-| `none`    | No applicable FDD exists                                               |
+| Value         | Meaning                                                                   |
+|---------------|---------------------------------------------------------------------------|
+| `full`        | The FDD fully describes this format or mechanism                          |
+| `partial`     | The FDD exists and is relevant but does not fully cover the focused topic |
+| `preliminary` | The FDD is in preliminary/draft status at the Library of Congress         |
+| `none`        | No applicable FDD exists                                                  |
 
 ### Metadata Fields
 Where defined, a table of the noted named fields carried by the mechanism that are relevant to CAP. Many fields are defined vaguely and could be or could not be used in a manner relevant to CAP, so this list is a selection of notable fields and not intended to be exhaustive. Each field has:
