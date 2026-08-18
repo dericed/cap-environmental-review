@@ -109,7 +109,7 @@
     <structure>binary-chunk</structure>
     <readability type="open">ISO/IEC 15948 and W3C PNG specification; open standard with no licensing restrictions.</readability>
     <verifiability type="signed">C2PA stored in custom caBX chunk provides cryptographic signing and hard binding to image content. XMP and EXIF metadata in iTXt/eXIf chunks are informative and not integrity-protected. PNG CRC checksums provide per-chunk structural integrity only.</verifiability>
-    <persistence type="high">Lossless compression; widely used as an archival and distribution format for images requiring transparency or lossless fidelity.</persistence>
+    <persistence type="high">Lossless compression; widely used as an archival and distribution format for images requiring transparency or lossless fidelity. Recommended by FADGI for Documents (Unbound): Modern Textual Records: https://www.digitizationguidelines.gov/guidelines/FADGITechnicalGuidelinesforDigitizingCulturalHeritageMaterials_ThirdEdition_05092023.pdf</persistence>
     <c2pa-support>
       <mode type="embedded-cabx-chunk">C2PA manifest store embedded in custom caBX chunk. Hard binding to image content via content hash.</mode>
       <mode type="sidecar">C2PA manifest store delivered as a standalone .c2pa sidecar file; uses C2PA soft binding.</mode>
