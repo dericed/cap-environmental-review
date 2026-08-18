@@ -112,7 +112,7 @@ The broad media or metadata category of the format.
 | Value      | Meaning                                              |
 |------------|------------------------------------------------------|
 | `audio`    | Audio container or codec format                      |
-| `video`    | Video container format                               |
+| `moving image` | Video container format                           |
 | `image`    | Still image format                                   |
 | `metadata` | Metadata standard or packaging format                |
 

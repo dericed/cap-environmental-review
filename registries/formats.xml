@@ -164,11 +164,11 @@
     </tcr4cap-comments>
   </format>
 
-<!-- Video Formats -->
+<!-- Moving Image Formats -->
 
   <format id="mp4-isobmff">
     <name>MP4 / ISO Base Media File Format</name>
-    <type>video</type>
+    <type>moving image</type>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000525.shtml</url>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000079.shtml</url>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml</url>
@@ -199,7 +199,7 @@
 
   <format id="mkv">
     <name>Matroska (MKV)</name>
-    <type>video</type>
+    <type>moving image</type>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml</url>
     <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000516.shtml</url>
     <structure>binary-ebml</structure>
