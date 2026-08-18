@@ -5,8 +5,8 @@
   <format id="bwf">
     <name>Broadcast WAVE Format (BWF)</name>
     <type>audio</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml</url>
+    <fdd-ref id="FDD000356" status="full" name="Broadcast WAVE Audio File Format, Version 1" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000356.shtml"/>
+    <fdd-ref id="FDD000357" status="full" name="Broadcast WAVE Audio File Format, Version 2" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000357.shtml"/>
     <url type="guidelines">https://www.digitizationguidelines.gov/guidelines/digitize-embedding.html</url>
     <structure>binary-chunk</structure>
     <readability type="open">EBU Tech 3285 and FADGI specifications are publicly available; no licensing restrictions on implementation or use.</readability>
@@ -37,8 +37,8 @@
   <format id="flac">
     <name>FLAC (Free Lossless Audio Codec)</name>
     <type>audio</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000657.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml</url>
+    <fdd-ref id="FDD000657" status="full" name="FLAC Family" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000657.shtml"/>
+    <fdd-ref id="FDD000198" status="full" name="FLAC (Free Lossless Audio Codec), Version 1.1.2" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000198.shtml"/>
     <structure>binary-block</structure>
     <readability type="open">Full open specification originally published by Xiph.org and later standardized as IETF RFC 9639; no licensing restrictions on implementation or use.</readability>
     <verifiability type="integrity-only">Natively stores an MD5 signature of unencoded audio in the STREAMINFO block and CRC-8/CRC-16 checksums per frame (RFC 9639). Provides format-level integrity verification of audio data only; checksums do not cover metadata blocks. No signature or provenance chain in the base format.</verifiability>
@@ -68,12 +68,12 @@
   <format id="jpeg">
     <name>JPEG</name>
     <type>image</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000538.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000653.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000655.shtml</url>
+    <fdd-ref id="FDD000017" status="full" name="JPEG Image Encoding Family" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000017.shtml"/>
+    <fdd-ref id="FDD000018" status="full" name="JFIF, JPEG File Interchange Format, Version 1.02" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000018.shtml"/>
+    <fdd-ref id="FDD000147" status="full" name="JPEG Encoded File with Exif Metadata" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000147.shtml"/>
+    <fdd-ref id="FDD000538" status="preliminary" name="JPEG XL File Format" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000538.shtml"/>
+    <fdd-ref id="FDD000653" status="partial" name="JPEG Universal Metadata Box Format (JUMBF)" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000653.shtml"/>
+    <fdd-ref id="FDD000655" status="preliminary" name="JPEG XT (JPEG eXTension)" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000655.shtml"/>
     <url type="homepage">https://jpeg.org/</url>
     <structure>binary-segment</structure>
     <readability type="published-standard">ISO/IEC 10918 and ITU-T T.81; open standard with no licensing restrictions on implementation or use.</readability>
@@ -105,7 +105,7 @@
   <format id="png">
     <name>PNG (Portable Network Graphics)</name>
     <type>image</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000153.shtml</url>
+    <fdd-ref id="FDD000153" status="full" name="Portable Network Graphics" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000153.shtml"/>
     <structure>binary-chunk</structure>
     <readability type="open">ISO/IEC 15948 and W3C PNG specification; open standard with no licensing restrictions.</readability>
     <verifiability type="signed">C2PA stored in custom caBX chunk provides cryptographic signing and hard binding to image content. XMP and EXIF metadata in iTXt/eXIf chunks are informative and not integrity-protected. PNG CRC checksums provide per-chunk structural integrity only.</verifiability>
@@ -136,8 +136,8 @@
   <format id="tiff">
     <name>TIFF (Tagged Image File Format)</name>
     <type>image</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000145.shtml</url>
+    <fdd-ref id="FDD000022" status="full" name="TIFF, Revision 6.0" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml"/>
+    <fdd-ref id="FDD000145" status="full" name="TIFF Uncompressed File with Exif Metadata" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000145.shtml"/>
     <structure>binary</structure>
     <readability type="open">Open standard with no licensing restrictions on implementation or use.</readability>
     <verifiability type="signed">C2PA manifests can be natively embedded in TIFF via a JUMBF box stored in the IFD structure, as defined in C2PA specification 2.4, providing cryptographic signing and hard binding to the content. A sidecar .c2pa file is also supported as an alternative delivery path. Native TIFF metadata (EXIF, IPTC, XMP) is informative and not integrity-protected outside of C2PA.</verifiability>
@@ -170,9 +170,9 @@
   <format id="mp4-isobmff">
     <name>MP4 / ISO Base Media File Format</name>
     <type>moving image</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000525.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000079.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml</url>
+    <fdd-ref id="FDD000079" status="full" name="ISO Base Media File Format" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000079.shtml"/>
+    <fdd-ref id="FDD000155" status="full" name="MPEG-4 File Format, Version 2" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000155.shtml"/>
+    <fdd-ref id="FDD000525" status="preliminary" name="High Efficiency Image File (HEIF) Format, MPEG-H Part 12" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000525.shtml"/>
     <structure>binary-atom</structure>
     <readability type="published-standard">ISO/IEC 14496-12 (ISOBMFF); open standard. MP4 file format (ISO/IEC 14496-14) and related derivatives (MOV, MJ2, 3GP) are based on the same box/atom structure.</readability>
     <verifiability type="signed">C2PA stored in uuid atom provides cryptographic signing and hard binding to video content. XMP and other metadata atoms are informative and not integrity-protected.</verifiability>
@@ -201,8 +201,8 @@
   <format id="mkv">
     <name>Matroska (MKV)</name>
     <type>moving image</type>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml</url>
-    <url type="fdd">https://www.loc.gov/preservation/digital/formats/fdd/fdd000516.shtml</url>
+    <fdd-ref id="FDD000342" status="full" name="Matroska Multimedia Container" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml"/>
+    <fdd-ref id="FDD000516" status="preliminary" name="Extensible Binary Meta Language" url="https://www.loc.gov/preservation/digital/formats/fdd/fdd000516.shtml"/>
     <structure>binary-ebml</structure>
     <readability type="open">Matroska specification published by the Matroska.org community; IETF RFC 9559 (EBML) provides the underlying container standard.</readability>
     <verifiability type="none">No native cryptographic signing (though an early EBML draft included an Element signing feature which was dropped before standardization). Tag and attachment elements can store UTF-8 and binary metadata. Any Matroska Element may store a hash of the following content of the Element. This feature can verify integrity of the Element against the stored hash (if it exists), but there is no signature mechanism. No C2PA embedding path is defined in the C2PA Technical Specification as of 2026-06.</verifiability>
